@@ -12,10 +12,10 @@ const LoginScreen = () => {
                     <form className="flex flex-col gap-4 w-full">
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="email1" value="Your email" />
+                                <Label htmlFor="email" value="Your email" />
                             </div>
                             <TextInput
-                                id="email1"
+                                id="email"
                                 type="email"
                                 placeholder="Email"
                                 required={true}
@@ -38,7 +38,9 @@ const LoginScreen = () => {
                             <Checkbox id="remember" />
                             <Label htmlFor="remember">Remember me</Label>
                         </div>
-                        <Button type="submit">Login</Button>
+                        <Button gradientMonochrome="info" type="submit">
+                            Sign in
+                        </Button>
                     </form>
                 </div>
             </div>

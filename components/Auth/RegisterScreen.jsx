@@ -83,7 +83,9 @@ const RegisterScreen = () => {
                             <Checkbox id="remember" />
                             <Label htmlFor="remember">Remember me</Label>
                         </div>
-                        <Button type="submit">Register</Button>
+                        <Button gradientMonochrome="info" type="submit">
+                            Sign Up
+                        </Button>
                     </form>
                 </div>
             </div>
