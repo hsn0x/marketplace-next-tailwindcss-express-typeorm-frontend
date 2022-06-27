@@ -1,8 +1,7 @@
 import React from "react";
-import { Card, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import LoginScreen from "../../components/Auth/LoginScreen";
 
-const login = () => {
+const LoginPage = () => {
     return (
         <div>
             <div className="max-w-lg mx-auto">
@@ -14,4 +13,4 @@ const login = () => {
     );
 };
 
-export default login;
+export default LoginPage;
