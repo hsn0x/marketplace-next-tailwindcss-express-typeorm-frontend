@@ -1,5 +1,7 @@
-export default function About() {
-    const pageTitle = "Contact";
+import React from "react";
 
-    return <h1>Hello</h1>;
-}
+const contact = () => {
+    return <div>contact</div>;
+};
+
+export default contact;

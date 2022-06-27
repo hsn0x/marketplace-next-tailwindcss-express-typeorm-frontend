@@ -1,7 +1,7 @@
+import React from "react";
 
-export default function About () {
-  const pageTitle = 'About'
+const blog = () => {
+    return <div>blog</div>;
+};
 
-  
-  return (<h1>Hello</h1>)
-}
+export default blog;

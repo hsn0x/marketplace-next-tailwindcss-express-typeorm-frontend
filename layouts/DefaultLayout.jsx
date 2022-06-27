@@ -1,12 +1,16 @@
 import React from "react";
 import { FooterScreen, NavbarScreen } from "../components";
+import SidebarScreen from "../components/SidebarScreen";
 
 const DefaultLayout = ({ children }) => {
     return (
         <>
             <div className="container mx-auto">
                 <NavbarScreen />
-                <main>{children}</main>
+                <div className="flex">
+                    <SidebarScreen />
+                    <main className="w-full">{children}</main>
+                </div>
                 <FooterScreen />
             </div>
         </>
