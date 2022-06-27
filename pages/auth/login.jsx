@@ -6,12 +6,9 @@ const login = () => {
     return (
         <div>
             <div className="max-w-lg mx-auto">
-                <Card>
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Login Screen
-                    </h5>
+                <div className="my-20">
                     <LoginScreen />
-                </Card>
+                </div>
             </div>
         </div>
     );

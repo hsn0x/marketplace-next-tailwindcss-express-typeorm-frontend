@@ -28,7 +28,6 @@ const navigations = [
 const NavbarScreen = () => {
     return (
         <Navbar fluid={true} rounded={true}>
-            <Link href="/about">About</Link>
             <Navbar.Brand href="https://flowbite.com/">
                 <img
                     src="https://flowbite.com/docs/images/logo.svg"
@@ -36,7 +35,7 @@ const NavbarScreen = () => {
                     alt="Flowbite Logo"
                 />
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    Flowbite
+                    HSN - Marketplace
                 </span>
             </Navbar.Brand>
             <div className="flex md:order-2">

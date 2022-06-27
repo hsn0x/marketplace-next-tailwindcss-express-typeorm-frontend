@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import NavbarScreen from "./NavbarScreen";
+import FooterScreen from "./FooterScreen";
 
-export { Navbar, Footer };
+export { NavbarScreen, FooterScreen };

@@ -6,12 +6,9 @@ const Register = () => {
     return (
         <div>
             <div className="max-w-lg mx-auto">
-                <Card>
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Register Screen
-                    </h5>
+                <div className="my-20">
                     <RegisterScreen />
-                </Card>
+                </div>
             </div>
         </div>
     );
