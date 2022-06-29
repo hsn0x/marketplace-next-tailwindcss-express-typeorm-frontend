@@ -19,8 +19,8 @@ const Products = () => {
         const fetchProducts = async () => {
             productsFetchRequest();
             try {
-                const { data: products } = await axiosServer.get("/products");
-                productsFetchSuccess(products);
+                const { data } = await axiosServer.get("/products");
+                productsFetchSuccess(data.products);
             } catch (error) {
                 productsFetchFail(getError(error));
             }
@@ -43,7 +43,7 @@ const Products = () => {
                     {products.map((product) => (
                         <div key={product.id} className="">
                             <Card style={{ height: "100%" }}>
-                                <Link href={`products/${product.slug}`}>
+                                <Link href={`products/title/${product.slug}`}>
                                     <h2 className="">{product.title}</h2>
                                 </Link>
                                 <div className="h-40">
