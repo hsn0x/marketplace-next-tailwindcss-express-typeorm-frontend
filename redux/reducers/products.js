@@ -10,8 +10,10 @@ const PRODUCTS_DELETE_FAIL = "PRODUCTS_DELETE_FAIL";
 const PRODUCTS_DELETE_RESET = "PRODUCTS_DELETE_RESET";
 
 const initialState = {
-    product: null,
-    products: null,
+    product: {},
+    products: [],
+    loading: false,
+    error: "",
 };
 
 const reducer = (state = initialState, action) => {
