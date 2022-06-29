@@ -2,6 +2,7 @@ import React from "react";
 
 import { FooterScreen, NavbarScreen } from "../components";
 import SidebarScreen from "../components/SidebarScreen";
+import { withSessionSsr } from "../lib/withSession";
 
 const DefaultLayout = ({ children }) => {
     return (

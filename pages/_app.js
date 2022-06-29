@@ -1,10 +1,9 @@
 import DefaultLayout from "../layouts/DefaultLayout";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { Provider } from "react-redux";
-
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../styles/globals.css";
-import { store } from "../Store";
+import store from "../redux/store";
 
 config.autoAddCss = false;
 

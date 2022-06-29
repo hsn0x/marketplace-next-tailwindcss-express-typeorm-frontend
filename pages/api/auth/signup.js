@@ -1,5 +1,7 @@
-import nc from "nc";
+import nc from "next-connect";
 
 const handler = nc();
 
-handler.get(async (req, res) => {});
+handler.post(async (req, res) => {});
+
+export default handler;
