@@ -1,13 +1,19 @@
 // middleware.ts
 import { NextResponse } from "next/server";
-import { useDispatch } from "react-redux";
-import { getUser } from "../redux/reducers/user";
+import { serialize, parse } from "cookie";
+import { getTokenCookie, parseCookies } from "../lib/auth-cookie";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request) {
+export function middleware(req) {
+    // const authUser = req.session?.user;
+    // console.log("from middleware", { req });
     // me();
     // return NextResponse.redirect(new URL("/", request.url));
     // request.user = { name: "John" };
     // console.log(request.session);
+    // console.log(parse(req.cookies));
+
+    // const cookie = parseCookies(req);
+
+    // console.log(cookie);
     return NextResponse.next();
 }

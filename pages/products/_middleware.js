@@ -3,7 +3,6 @@ import cookie from "js-cookie";
 import { getTokenCookie } from "../../lib/auth-cookie";
 
 const middleware = async (request) => {
-    console.log(request.nextUrl.pathname);
     const pathname = request.nextUrl.pathname;
     const protectedPath = [
         "/products/create",

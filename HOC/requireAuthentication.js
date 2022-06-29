@@ -1,13 +1,35 @@
 import { useDispatch } from "react-redux";
 import { axiosServer } from "../db/axios";
 import { getTokenCookie } from "../lib/auth-cookie";
-import { withSessionSsr } from "../lib/withSession";
+import { withSessionSsr as wss } from "../lib/withSession";
 
-export const requireAuthentication = (gssp) => {
-    return async (context) => {
+// export const requireAuthentication = (gssp) => {
+//     return async (context) => {
+//         const { req, res } = context;
+//         const authToken = getTokenCookie(req);
+
+//         return await gssp(context); // Continue on to call `getServerSideProps` logic
+//     };
+// };
+
+export const requireAuthentication = (gssp) =>
+    wss(async (context) => {
         const { req, res } = context;
-        const authToken = getTokenCookie(req);
+        const authUser = req.session.user;
 
-        return await gssp(context); // Continue on to call `getServerSideProps` logic
-    };
-};
+        if (!authUser) {
+            return {
+                redirect: {
+                    destination: "/auth/login",
+                    permanent: false,
+                },
+            };
+        }
+
+        return {
+            props: {
+                ...(await gssp(context)),
+                authUser,
+            },
+        };
+    });

@@ -1,11 +1,3 @@
-const updateAuth = (auth) => {
-    return (dispatch) =>
-        dispatch({
-            type: "UPDATE_AUTH",
-            payload: auth,
-        });
-};
-
 const updateEmail = (email) => {
     return (dispatch) => {
         dispatch({
@@ -24,4 +16,4 @@ const updatePassword = (password) => {
     };
 };
 
-export { updateAuth, updateEmail, updatePassword };
+export { updateEmail, updatePassword };

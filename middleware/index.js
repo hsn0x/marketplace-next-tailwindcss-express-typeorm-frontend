@@ -1,6 +1,4 @@
-export default function middleware(req) {
-    return console.log(req);
-}
+export default function middleware(req) {}
 
 export const config = {
     matcher: "/",

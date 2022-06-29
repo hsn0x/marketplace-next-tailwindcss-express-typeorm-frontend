@@ -61,8 +61,7 @@ export const signIn = () => async (dispatch, getState) => {
             payload: signInData.isAuthenticated,
         });
         const { data: authUserData } = await axiosServer.get("/auth/me");
-        const abcd = await axiosClient.post("/auth/signin", authUserData);
-        console.log(abcd);
+        await axiosClient.post("/auth/signin", authUserData);
         return signInData;
     } catch (error) {
         Notify.failure(error.response?.data?.message || "Sign in error", {
@@ -70,7 +69,7 @@ export const signIn = () => async (dispatch, getState) => {
             timeout: 6000,
             pauseOnHover: true,
         });
-        return null;
+        return error.response.data;
     }
 };
 

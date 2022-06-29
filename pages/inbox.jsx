@@ -2,7 +2,6 @@ import React from "react";
 import { withSessionSsr } from "../lib/withSession";
 
 const InboxPage = ({ user }) => {
-    console.log({ inboxpage: user });
     return <div>InboxPage</div>;
 };
 

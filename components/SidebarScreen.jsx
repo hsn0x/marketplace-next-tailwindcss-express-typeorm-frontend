@@ -239,16 +239,69 @@ const SidebarScreen = () => {
         },
     ];
 
-    console.log({ side: auth.user });
-    if (auth.user) {
-        sidebarNavigations
-            .filter((nav) => ["auth-login", "auth-register"].includes(nav.slug))
-            .forEach((nav) => (nav.show = false));
-    } else {
-        sidebarNavigations
-            .filter((nav) => ["auth-logout", "profile"].includes(nav.slug))
-            .forEach((nav) => (nav.show = false));
-    }
+    const authSidebarNavigationsStores = [
+        "stores-create",
+        "stores-edit",
+        "stores-delete",
+    ];
+    const authSidebarNavigationsProducts = [
+        "products-create",
+        "products-edit",
+        "products-delete",
+    ];
+    const authSidebarNavigations = [
+        "dashboard",
+        "profile",
+        "auth-logout",
+        "inbox",
+        "cart",
+        ...authSidebarNavigationsStores,
+        ...authSidebarNavigationsProducts,
+    ];
+    const guestSidebarNavigations = ["auth-login", "auth-register"];
+
+    const handelSidebarNavigations = (navss) =>
+        navss.map((nav) => {
+            if (nav.children.length > 0) {
+                return {
+                    ...nav,
+                    children: [...handelSidebarNavigations(nav.children)],
+                };
+            } else {
+                if (auth.user && guestSidebarNavigations.includes(nav.slug)) {
+                    return {
+                        ...nav,
+                        show: false,
+                    };
+                } else if (
+                    !auth.user &&
+                    authSidebarNavigations.includes(nav.slug)
+                ) {
+                    return {
+                        ...nav,
+                        show: false,
+                    };
+                } else {
+                    return {
+                        ...nav,
+                    };
+                }
+            }
+        });
+
+    const isHandelSidebarNavigations =
+        handelSidebarNavigations(sidebarNavigations);
+    console.log(isHandelSidebarNavigations);
+
+    // if (auth.user) {
+    //     sidebarNavigations
+    //         .filter((nav) => guestSidebarNavigations.includes(nav.slug))
+    //         .forEach((nav) => (nav.show = false));
+    // } else {
+    //     sidebarNavigations
+    //         .filter((nav) => authSidebarNavigations.includes(nav.slug))
+    //         .forEach((nav) => (nav.show = false));
+    // }
 
     const ShowSidebarNavigations = ({ navs, navsParent }) => {
         return (
@@ -293,7 +346,9 @@ const SidebarScreen = () => {
             <Sidebar aria-label="Sidebar with multi-level dropdown example">
                 <Sidebar.Items>
                     <Sidebar.ItemGroup>
-                        <ShowSidebarNavigations navs={sidebarNavigations} />
+                        <ShowSidebarNavigations
+                            navs={isHandelSidebarNavigations}
+                        />
                     </Sidebar.ItemGroup>
                 </Sidebar.Items>
             </Sidebar>
