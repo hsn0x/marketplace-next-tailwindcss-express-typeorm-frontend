@@ -10,8 +10,7 @@ const DashboarPage = ({ authUser }) => {
     if (authUser) {
         dispatch(updateAuth(authUser));
     }
-    console.log({ dashboardpage: authUser });
-    return <div></div>;
+    return <div>Dashboard</div>;
 };
 
 export const getServerSideProps = withSessionSsr(

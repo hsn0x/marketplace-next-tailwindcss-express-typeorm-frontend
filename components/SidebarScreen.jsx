@@ -36,6 +36,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaHome,
             label: "Home",
+            slug: "",
             href: "/",
             hrefMethod: () => router.push("/"),
             active: true,
@@ -47,6 +48,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaChartPie,
             label: "Dashboard",
+            slug: "dashboard",
             href: "/dashboard",
             hrefMethod: () => router.push("/dashboard"),
             active: false,
@@ -58,6 +60,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaStore,
             label: "Stores",
+            slug: "stores",
             href: "/stores",
             hrefMethod: () => router.push("/stores"),
             active: false,
@@ -67,6 +70,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "All Stores",
+                    slug: "stores-index",
                     href: "/stores",
                     hrefMethod: () => router.push("/stores"),
                     active: false,
@@ -78,6 +82,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "Create Store",
+                    slug: "stores-create",
                     href: "/stores/create",
                     hrefMethod: () => router.push("/stores/create"),
                     active: false,
@@ -92,6 +97,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaStore,
             label: "Product",
+            slug: "products",
             href: "/products",
             hrefMethod: () => router.push("/products"),
             active: false,
@@ -101,6 +107,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "All Products",
+                    slug: "products-index",
                     href: "/products",
                     hrefMethod: () => router.push("/products"),
                     active: false,
@@ -112,6 +119,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "Create Product",
+                    slug: "products-create",
                     href: "/products/create",
                     hrefMethod: () => router.push("/products/create"),
                     active: false,
@@ -123,6 +131,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "Edit Product",
+                    slug: "products-edit",
                     href: "/products/edit",
                     hrefMethod: () => router.push("/products/edit"),
                     active: false,
@@ -134,6 +143,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "Delete Product",
+                    slug: "products-delete",
                     href: "/products/delete",
                     hrefMethod: () => router.push("/products/delete"),
                     active: false,
@@ -145,6 +155,7 @@ const SidebarScreen = () => {
                     id: uuid(),
                     icon: FaStore,
                     label: "Play Product",
+                    slug: "products-play",
                     href: "/products/play",
                     hrefMethod: () => router.push("/products/play"),
                     active: false,
@@ -159,6 +170,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaInbox,
             label: "Inbox",
+            slug: "inbox",
             href: "/inbox",
             hrefMethod: () => router.push("/inbox"),
             active: false,
@@ -170,6 +182,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaUser,
             label: "Profile",
+            slug: "profile",
             href: "/profile",
             hrefMethod: () => router.push("/profile"),
             active: false,
@@ -181,6 +194,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaShoppingBag,
             label: "Cart",
+            slug: "cart",
             href: "/cart",
             hrefMethod: () => router.push("/cart"),
             active: false,
@@ -192,6 +206,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaArrowRight,
             label: "Sign In",
+            slug: "auth-login",
             href: "/auth/login",
             hrefMethod: () => router.push("/auth/login"),
             active: false,
@@ -202,6 +217,7 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaTable,
             label: "Sign Up",
+            slug: "auth-register",
             href: "/auth/register",
             hrefMethod: () => router.push("/auth/register"),
             active: false,
@@ -213,8 +229,9 @@ const SidebarScreen = () => {
             id: uuid(),
             icon: FaArrowLeft,
             label: "Sign Out",
-            href: "/",
-            hrefMethod: () => router.push("/auth/login"),
+            slug: "auth-logout",
+            href: "/logout",
+            hrefMethod: () => router.push("/auth/logout"),
             active: false,
             show: true,
             children: [],
@@ -225,11 +242,11 @@ const SidebarScreen = () => {
     console.log({ side: auth.user });
     if (auth.user) {
         sidebarNavigations
-            .filter((nav) => ["Sign In", "Sign Up"].includes(nav.label))
+            .filter((nav) => ["auth-login", "auth-register"].includes(nav.slug))
             .forEach((nav) => (nav.show = false));
     } else {
         sidebarNavigations
-            .filter((nav) => ["Sign Out", "Profile"].includes(nav.label))
+            .filter((nav) => ["auth-logout", "profile"].includes(nav.slug))
             .forEach((nav) => (nav.show = false));
     }
 

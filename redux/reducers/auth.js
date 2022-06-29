@@ -119,6 +119,7 @@ export const signOut = (e) => {
         try {
             await axiosServer.get("/auth/logout");
             await axiosClient.get("/auth/signout");
+            dispatch(updateAuth(null));
             Notify.success("Logged out", {
                 position: "center",
                 timeout: 2000,
