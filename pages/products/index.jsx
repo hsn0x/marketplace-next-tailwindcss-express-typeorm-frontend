@@ -8,9 +8,8 @@ import { getError } from "../../utils/error";
 
 const Products = () => {
     const dispatch = useDispatch();
-    // const products = useSelector(({ products }) => products);
-    const products = [];
-    // console.log({ products });
+    const products = useSelector(({ products }) => products);
+    console.log({ products });
     const { productsFetchFail, productsFetchRequest, productsFetchSuccess } =
         bindActionCreators(productsActions, dispatch);
 
@@ -26,7 +25,7 @@ const Products = () => {
             }
         };
         fetchProducts();
-    }, [productsFetchFail, productsFetchRequest, productsFetchSuccess]);
+    }, []);
 
     return (
         <div>

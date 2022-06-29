@@ -1,16 +1,16 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import market from "./markets";
-import product from "./products";
-import user from "./users";
+import markets from "./markets";
+import products from "./products";
+import users from "./users";
 import auth from "./auth";
-import cart from "./carts";
+import carts from "./carts";
 
 const reducers = combineReducers({
-    market,
-    product,
-    user,
+    markets,
+    products,
+    users,
     auth,
-    cart,
+    carts,
 });
 
 export default reducers;
