@@ -1,9 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import market from "./market";
-import product from "./product";
-import user from "./user";
-import auth from "./auth";
-import cart from "./cart";
+import market from "./markets";
+import product from "./products";
+import user from "./users";
+import auth from "./auths";
+import cart from "./carts";
 
 const reducers = combineReducers({
     market,

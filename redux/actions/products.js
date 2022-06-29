@@ -5,17 +5,19 @@ const productsFetchRequest = () => {
         });
     };
 };
-const productsFetchSuccess = () => {
+const productsFetchSuccess = (payload) => {
     return (dispatch) => {
         dispatch({
             type: "PRODUCTS_FETCH_SUCCESS",
+            payload,
         });
     };
 };
-const productsFetchFail = () => {
+const productsFetchFail = (payload) => {
     return (dispatch) => {
         dispatch({
             type: "PRODUCTS_FETCH_FAIL",
+            payload,
         });
     };
 };

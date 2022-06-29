@@ -1,19 +1,37 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { axiosServer } from "../../db/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { productsActions } from "../../redux/actions";
+import { bindActionCreators } from "redux";
+import { getError } from "../../utils/error";
 
-const Product = () => {
+const Products = () => {
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.product);
+    console.log({ products });
+    const { productsFetchFail, productsFetchRequest, productsFetchSuccess } =
+        bindActionCreators(productsActions, dispatch);
+
     useEffect(() => {
         const fetchProducts = async () => {
-            const { data: products } = await axiosServer.get("/products");
+            productsFetchRequest();
 
-            console.log(products);
-            return products;
+            try {
+                const { data: products } = await axiosServer.get("/products");
+                productsFetchSuccess(products);
+            } catch (error) {
+                productsFetchFail(getError(error));
+            }
         };
         fetchProducts();
-    }, []);
+    }, [productsFetchFail, productsFetchRequest, productsFetchSuccess]);
 
-    return <div>Product</div>;
+    return (
+        <div>
+            <h1>s</h1>
+        </div>
+    );
 };
 
 export const getServerSideProps = async () => {
@@ -22,4 +40,4 @@ export const getServerSideProps = async () => {
     };
 };
 
-export default Product;
+export default Products;
