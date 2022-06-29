@@ -8,8 +8,9 @@ import { getError } from "../../utils/error";
 
 const Products = () => {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.product);
-    console.log({ products });
+    // const products = useSelector(({ products }) => products);
+    const products = [];
+    // console.log({ products });
     const { productsFetchFail, productsFetchRequest, productsFetchSuccess } =
         bindActionCreators(productsActions, dispatch);
 
