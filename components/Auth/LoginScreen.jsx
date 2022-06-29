@@ -57,7 +57,6 @@ const LoginScreen = () => {
                                 type="email"
                                 placeholder="Email"
                                 required={true}
-                                value="j@me.com"
                             />
                         </div>
                         <div>
@@ -74,7 +73,6 @@ const LoginScreen = () => {
                                 id="password1"
                                 type="password"
                                 required={true}
-                                value="qwe"
                             />
                         </div>
                         <div className="flex items-center gap-2">

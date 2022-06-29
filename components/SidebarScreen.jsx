@@ -291,7 +291,6 @@ const SidebarScreen = () => {
 
     const isHandelSidebarNavigations =
         handelSidebarNavigations(sidebarNavigations);
-    console.log(isHandelSidebarNavigations);
 
     // if (auth.user) {
     //     sidebarNavigations

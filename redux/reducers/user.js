@@ -30,6 +30,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case "UPDATE_EMAIL":
+            return { ...state, email: action.payload };
         case GET_USERS:
             return action.payload;
         case SET_USER:

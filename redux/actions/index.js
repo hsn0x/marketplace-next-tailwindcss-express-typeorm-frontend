@@ -1,2 +1,3 @@
-export * as authActions from "./auth";
-export * as userAction from "./user";
+export * as authActions from "./auths";
+export * as userAction from "./users";
+export * as productsActions from "./products";

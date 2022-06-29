@@ -1,7 +1,7 @@
 import axios from "axios";
 import { axiosClient, axiosServer } from "../../db/axios";
 import { Notify } from "notiflix";
-import { updateAuth, updateIsAuthenticated } from "../actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../actions/auths";
 
 const UPDATE_IS_AUTH = "UPDATE_IS_AUTH";
 const UPDATE_AUTH = "UPDATE_AUTH";
