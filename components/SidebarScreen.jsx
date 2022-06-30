@@ -30,20 +30,7 @@ const SidebarScreen = () => {
         await dispatch(signOut());
         router.push("/auth/login");
     };
-
-    const sidebarNavigations = [
-        {
-            id: uuid(),
-            icon: FaHome,
-            label: "Home",
-            slug: "",
-            href: "/",
-            hrefMethod: () => router.push("/"),
-            active: true,
-            show: true,
-            children: [],
-            method: null,
-        },
+    const sidebarNavigationsAuth = [
         {
             id: uuid(),
             icon: FaChartPie,
@@ -56,6 +43,81 @@ const SidebarScreen = () => {
             children: [],
             method: null,
         },
+        {
+            id: uuid(),
+            icon: FaInbox,
+            label: "Inbox",
+            slug: "inbox",
+            href: "/inbox",
+            hrefMethod: () => router.push("/inbox"),
+            active: false,
+            show: true,
+            children: [],
+            method: null,
+        },
+        {
+            id: uuid(),
+            icon: FaUser,
+            label: "Profile",
+            slug: "profile",
+            href: "/profile",
+            hrefMethod: () => router.push("/profile"),
+            active: false,
+            show: true,
+            children: [],
+            method: null,
+        },
+        {
+            id: uuid(),
+            icon: FaShoppingBag,
+            label: "Cart",
+            slug: "cart",
+            href: "/cart",
+            hrefMethod: () => router.push("/cart"),
+            active: false,
+            show: true,
+            children: [],
+            method: null,
+        },
+        {
+            id: uuid(),
+            icon: FaArrowLeft,
+            label: "Sign Out",
+            slug: "auth-logout",
+            href: "/logout",
+            hrefMethod: () => router.push("/auth/logout"),
+            active: false,
+            show: true,
+            children: [],
+            method: (e) => handelSignout(e),
+        },
+    ];
+    const sidebarNavigationsGuest = [
+        {
+            id: uuid(),
+            icon: FaArrowRight,
+            label: "Sign In",
+            slug: "auth-login",
+            href: "/auth/login",
+            hrefMethod: () => router.push("/auth/login"),
+            active: false,
+            show: true,
+            children: [],
+        },
+        {
+            id: uuid(),
+            icon: FaTable,
+            label: "Sign Up",
+            slug: "auth-register",
+            href: "/auth/register",
+            hrefMethod: () => router.push("/auth/register"),
+            active: false,
+            show: true,
+            children: [],
+            method: null,
+        },
+    ];
+    const sidebarNavigationsStores = [
         {
             id: uuid(),
             icon: FaStore,
@@ -93,6 +155,8 @@ const SidebarScreen = () => {
             ],
             method: null,
         },
+    ];
+    const sidebarNavigationsProducts = [
         {
             id: uuid(),
             icon: FaStore,
@@ -151,13 +215,64 @@ const SidebarScreen = () => {
                     children: [],
                     method: null,
                 },
+            ],
+            method: null,
+        },
+    ];
+    const sidebarNavigationsMedia = [
+        {
+            id: uuid(),
+            icon: FaStore,
+            label: "Media",
+            slug: "media",
+            href: "/media",
+            hrefMethod: () => router.push("/media"),
+            active: false,
+            show: true,
+            children: [
                 {
                     id: uuid(),
                     icon: FaStore,
-                    label: "Play Product",
-                    slug: "products-play",
-                    href: "/products/play",
-                    hrefMethod: () => router.push("/products/play"),
+                    label: "All Medias",
+                    slug: "media-index",
+                    href: "/media",
+                    hrefMethod: () => router.push("/media"),
+                    active: false,
+                    show: true,
+                    children: [],
+                    method: null,
+                },
+                {
+                    id: uuid(),
+                    icon: FaStore,
+                    label: "Create Media",
+                    slug: "media-create",
+                    href: "/media/create",
+                    hrefMethod: () => router.push("/media/create"),
+                    active: false,
+                    show: true,
+                    children: [],
+                    method: null,
+                },
+                {
+                    id: uuid(),
+                    icon: FaStore,
+                    label: "Edit Media",
+                    slug: "media-edit",
+                    href: "/media/edit",
+                    hrefMethod: () => router.push("/media/edit"),
+                    active: false,
+                    show: true,
+                    children: [],
+                    method: null,
+                },
+                {
+                    id: uuid(),
+                    icon: FaStore,
+                    label: "Delete Product",
+                    slug: "media-delete",
+                    href: "/media/delete",
+                    hrefMethod: () => router.push("/media/delete"),
                     active: false,
                     show: true,
                     children: [],
@@ -166,99 +281,48 @@ const SidebarScreen = () => {
             ],
             method: null,
         },
-        {
-            id: uuid(),
-            icon: FaInbox,
-            label: "Inbox",
-            slug: "inbox",
-            href: "/inbox",
-            hrefMethod: () => router.push("/inbox"),
-            active: false,
-            show: true,
-            children: [],
-            method: null,
-        },
-        {
-            id: uuid(),
-            icon: FaUser,
-            label: "Profile",
-            slug: "profile",
-            href: "/profile",
-            hrefMethod: () => router.push("/profile"),
-            active: false,
-            show: true,
-            children: [],
-            method: null,
-        },
-        {
-            id: uuid(),
-            icon: FaShoppingBag,
-            label: "Cart",
-            slug: "cart",
-            href: "/cart",
-            hrefMethod: () => router.push("/cart"),
-            active: false,
-            show: true,
-            children: [],
-            method: null,
-        },
-        {
-            id: uuid(),
-            icon: FaArrowRight,
-            label: "Sign In",
-            slug: "auth-login",
-            href: "/auth/login",
-            hrefMethod: () => router.push("/auth/login"),
-            active: false,
-            show: true,
-            children: [],
-        },
-        {
-            id: uuid(),
-            icon: FaTable,
-            label: "Sign Up",
-            slug: "auth-register",
-            href: "/auth/register",
-            hrefMethod: () => router.push("/auth/register"),
-            active: false,
-            show: true,
-            children: [],
-            method: null,
-        },
-        {
-            id: uuid(),
-            icon: FaArrowLeft,
-            label: "Sign Out",
-            slug: "auth-logout",
-            href: "/logout",
-            hrefMethod: () => router.push("/auth/logout"),
-            active: false,
-            show: true,
-            children: [],
-            method: (e) => handelSignout(e),
-        },
     ];
-
-    const authSidebarNavigationsStores = [
+    const sidebarNavigations = [
+        {
+            id: uuid(),
+            icon: FaHome,
+            label: "Home",
+            slug: "",
+            href: "/",
+            hrefMethod: () => router.push("/"),
+            active: true,
+            show: true,
+            children: [],
+            method: null,
+        },
+        ...sidebarNavigationsStores,
+        ...sidebarNavigationsProducts,
+        ...sidebarNavigationsMedia,
+        ...sidebarNavigationsAuth,
+        ...sidebarNavigationsGuest,
+        ,
+    ];
+    const sidebarNavigationsAuthStoresSlug = [
         "stores-create",
         "stores-edit",
         "stores-delete",
     ];
-    const authSidebarNavigationsProducts = [
+    const sidebarNavigationsAuthProductsSlug = [
         "products-create",
         "products-edit",
         "products-delete",
     ];
-    const authSidebarNavigations = [
+    const sidebarNavigationsAuthSlug = [
+        "media",
         "dashboard",
         "profile",
         "auth-logout",
         "inbox",
         "cart",
-        ...authSidebarNavigationsStores,
-        ...authSidebarNavigationsProducts,
+        ...sidebarNavigationsAuthStoresSlug,
+        ...sidebarNavigationsAuthProductsSlug,
     ];
-    const guestSidebarNavigations = ["auth-login", "auth-register"];
+    const sidebarNavigationsGuestSlug = ["auth-login", "auth-register"];
 
     const handelSidebarNavigations = (navss) =>
         navss.map((nav) => {
@@ -268,14 +332,17 @@ const SidebarScreen = () => {
                     children: [...handelSidebarNavigations(nav.children)],
                 };
             } else {
-                if (auth.user && guestSidebarNavigations.includes(nav.slug)) {
+                if (
+                    auth.user &&
+                    sidebarNavigationsGuestSlug.includes(nav.slug)
+                ) {
                     return {
                         ...nav,
                         show: false,
                     };
                 } else if (
                     !auth.user &&
-                    authSidebarNavigations.includes(nav.slug)
+                    sidebarNavigationsAuthSlug.includes(nav.slug)
                 ) {
                     return {
                         ...nav,
@@ -294,11 +361,11 @@ const SidebarScreen = () => {
 
     // if (auth.user) {
     //     sidebarNavigations
-    //         .filter((nav) => guestSidebarNavigations.includes(nav.slug))
+    //         .filter((nav) => sidebarNavigationsGuestSlug.includes(nav.slug))
     //         .forEach((nav) => (nav.show = false));
     // } else {
     //     sidebarNavigations
-    //         .filter((nav) => authSidebarNavigations.includes(nav.slug))
+    //         .filter((nav) => sidebarNavigationsAuthSlug.includes(nav.slug))
     //         .forEach((nav) => (nav.show = false));
     // }
 

@@ -61,6 +61,7 @@ const MarketPage = ({ params }) => {
                             avatars={market.avatars}
                             name={market.name}
                             username={market.username}
+                            user={market.User}
                         />
                     </div>
 

@@ -1,11 +1,11 @@
 import React from "react";
-import ProductCreate from "../../components/Products/ProductCreate";
+import ProductCreatePage from "../../components/Product/create/ProductCreatePage";
 
 const CreateProduct = () => {
     return (
         <div className="max-w-4xl mx-auto">
             <div className="my-20">
-                <ProductCreate />
+                <ProductCreatePage />
             </div>
         </div>
     );

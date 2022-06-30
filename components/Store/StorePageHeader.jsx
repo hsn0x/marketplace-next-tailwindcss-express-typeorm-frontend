@@ -3,8 +3,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import StorePageHeaderAvatar from "./StorePageHeaderAvatar";
 import StorePageHeaderImages from "./StorePageHeaderImages";
+import StorePageHeaderOwner from "./StorePageHeaderOwner";
 
-const StorePageHeader = ({ images, avatars, name, username }) => {
+const StorePageHeader = ({ images, avatars, name, username, user }) => {
     return (
         <div>
             <Card>
@@ -14,6 +15,7 @@ const StorePageHeader = ({ images, avatars, name, username }) => {
                     name={name}
                     username={username}
                 />
+                <StorePageHeaderOwner username={user.username} />
             </Card>
         </div>
     );
