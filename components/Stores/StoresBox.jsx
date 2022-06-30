@@ -1,5 +1,5 @@
 import React from "react";
-import StoreBox from "./StoreBox";
+import StoreBox from "../Store/StoreBox";
 
 const StoresBox = ({ markets }) => {
     return (

@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { getError } from "../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
-import ProductBox from "../../components/Products/ProductBox";
+import ProductBox from "../../components/Product/ProductBox";
 import ProductPageTitle from "../../components/Products/ProductsPageTitle";
 import ProductPageLoading from "../../components/Products/ProductsPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";

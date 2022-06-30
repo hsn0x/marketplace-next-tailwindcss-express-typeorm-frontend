@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { getError } from "../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
-import StoreBox from "../../components/Stores/StoreBox";
+import StoreBox from "../../components/Store/StoreBox";
 import StorePageTitle from "../../components/Stores/StoresPageTitle";
 import StorePageLoading from "../../components/Stores/StoresPageLoading";
 import StoresBox from "../../components/Stores/StoresBox";

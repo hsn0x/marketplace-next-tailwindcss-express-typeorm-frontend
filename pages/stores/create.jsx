@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import StoreCreate from "../../components/Stores/StoreCreate";
+import StoreCreate from "../../components/Store/StoreCreate";
 import { requireAuthentication } from "../../HOC/requireAuthentication";
 import { updateAuth } from "../../redux/actions/auth";
 
