@@ -7,8 +7,14 @@ import { bindActionCreators } from "redux";
 import { getError } from "../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
+import ProductBox from "../../components/Products/ProductBox";
+import ProductPageTitle from "../../components/Products/ProductsPageTitle";
+import ProductPageLoading from "../../components/Products/ProductsPageLoading";
+import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
+import { updateAuth } from "../../redux/actions/auth";
+import ProductsBox from "../../components/Products/ProductsBox";
 
-const Products = () => {
+const Products = ({ authUser }) => {
     const dispatch = useDispatch();
     const { products, loading } = useSelector(({ products }) => products);
 
@@ -16,6 +22,7 @@ const Products = () => {
         bindActionCreators(productsActions, dispatch);
 
     useEffect(() => {
+        dispatch(updateAuth(authUser));
         const fetchProducts = async () => {
             productsFetchRequest();
             try {
@@ -30,49 +37,15 @@ const Products = () => {
 
     return (
         <div>
-            <Card>
-                {loading && (
-                    <div className="flex justify-center items-center">
-                        <Spinner
-                            aria-label="Extra small spinner example"
-                            size="xl"
-                        />
-                    </div>
-                )}
-                <h1>Products</h1>
-                <div className="grid grid-cols-3 gap-2">
-                    {products.map((product) => (
-                        <div key={product.id} className="">
-                            <Card style={{ height: "100%" }}>
-                                <Link href={`products/title/${product.slug}`}>
-                                    <h2 className="">{product.title}</h2>
-                                </Link>
-                                <div className="h-40">
-                                    <Carousel className="h-screen">
-                                        {product.images.map((image) => (
-                                            <img
-                                                src={image.url}
-                                                alt=""
-                                                key={image.public_id}
-                                            />
-                                        ))}
-                                    </Carousel>
-                                </div>
-                                <p>{product.description}</p>
-                                <h5>{product.price}</h5>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
-            </Card>
+            <ProductPageLoading loading={loading} />
+            <ProductPageTitle title="All Products" />
+            <ProductsBox products={products} />
         </div>
     );
 };
 
-export const getServerSideProps = async () => {
-    return {
-        props: {},
-    };
-};
+export const getServerSideProps = notRequireAuthentication((context) => {
+    return {};
+});
 
 export default Products;

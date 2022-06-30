@@ -9,7 +9,7 @@ import {
 } from "flowbite-react";
 import React from "react";
 
-const CreateProductScreen = () => {
+const ProductCreate = () => {
     return (
         <div>
             <Card>
@@ -123,4 +123,4 @@ const CreateProductScreen = () => {
     );
 };
 
-export default CreateProductScreen;
+export default ProductCreate;

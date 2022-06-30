@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import RegisterScreen from "../../components/Auth/RegisterScreen";
+import { requireNotAuthentication } from "../../HOC/requireNotAuthentication";
 
 const Register = () => {
     return (
@@ -13,5 +14,9 @@ const Register = () => {
         </div>
     );
 };
+
+export const getServerSideProps = requireNotAuthentication((context) => {
+    return {};
+});
 
 export default Register;

@@ -1,5 +1,6 @@
 import React from "react";
 import LoginScreen from "../../components/Auth/LoginScreen";
+import { requireNotAuthentication } from "../../HOC/requireNotAuthentication";
 
 const LoginPage = () => {
     return (
@@ -12,5 +13,9 @@ const LoginPage = () => {
         </div>
     );
 };
+
+export const getServerSideProps = requireNotAuthentication((context) => {
+    return {};
+});
 
 export default LoginPage;
