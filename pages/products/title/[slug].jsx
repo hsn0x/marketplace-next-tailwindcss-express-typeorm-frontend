@@ -53,10 +53,12 @@ const ProductPage = ({ params }) => {
                                 {
                                     <Carousel>
                                         {product.images.map((image) => (
-                                            <img
-                                                src={image.url}
-                                                key={image.public_id}
-                                            />
+                                            <div key={image.id}>
+                                                <img
+                                                    src={image.url}
+                                                    alt={image.public_id}
+                                                />
+                                            </div>
                                         ))}
                                     </Carousel>
                                 }
