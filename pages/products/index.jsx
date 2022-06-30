@@ -39,6 +39,7 @@ const Products = () => {
                         />
                     </div>
                 )}
+                <h1>Products</h1>
                 <div className="grid grid-cols-3 gap-2">
                     {products.map((product) => (
                         <div key={product.id} className="">

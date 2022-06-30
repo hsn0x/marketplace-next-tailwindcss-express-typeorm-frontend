@@ -10,7 +10,7 @@ const PRODUCT_DELETE_FAIL = "PRODUCT_DELETE_FAIL";
 const PRODUCT_DELETE_RESET = "PRODUCT_DELETE_RESET";
 
 const initialState = {
-    product: {},
+    product: null,
     loading: false,
     error: "",
 };
