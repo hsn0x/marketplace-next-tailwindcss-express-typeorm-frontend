@@ -1,7 +1,7 @@
 import React from "react";
 
 const MediaPage = () => {
-    return <div>MediaPage</div>;
+    return <div></div>;
 };
 
 export default MediaPage;
