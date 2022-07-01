@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productCreateActions } from "../../../redux/actions";
+import { faker } from "@faker-js/faker";
 
 const ProductCreatePageContentMedia = () => {
     const dispatch = useDispatch();
@@ -15,8 +16,8 @@ const ProductCreatePageContentMedia = () => {
     const handleMedia = (media) => {
         media.preventDefault();
         const files = media.target.files;
-        console.log(files);
-        productCreateUpdateMedia("");
+        const url = faker.image.imageUrl(600, 400, "Business", true);
+        productCreateUpdateMedia([{ public_id: faker.random.word(), url }]);
     };
     return (
         <div>

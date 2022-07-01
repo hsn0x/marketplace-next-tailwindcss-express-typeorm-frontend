@@ -357,6 +357,45 @@ const SidebarScreen = () => {
             method: null,
         },
     ];
+    const sidebarNavigationsAdmin = [
+        {
+            id: uuid(),
+            icon: FaStore,
+            label: "Admin",
+            slug: "admin",
+            href: "/admin",
+            hrefMethod: () => router.push("/admin"),
+            active: false,
+            show: true,
+            children: [
+                {
+                    id: uuid(),
+                    icon: FaStore,
+                    label: "Admin Home",
+                    slug: "admin-index",
+                    href: "/admin",
+                    hrefMethod: () => router.push("/admin"),
+                    active: false,
+                    show: true,
+                    children: [],
+                    method: null,
+                },
+                {
+                    id: uuid(),
+                    icon: FaStore,
+                    label: "Categories",
+                    slug: "admin-categories",
+                    href: "/admin/categories",
+                    hrefMethod: () => router.push("/admin/categories"),
+                    active: false,
+                    show: true,
+                    children: [],
+                    method: null,
+                },
+            ],
+            method: null,
+        },
+    ];
     const sidebarNavigations = [
         {
             id: uuid(),
@@ -370,6 +409,7 @@ const SidebarScreen = () => {
             children: [],
             method: null,
         },
+        ...sidebarNavigationsAdmin,
         ...sidebarNavigationsStores,
         ...sidebarNavigationsProducts,
         ...sidebarNavigationsMembers,
