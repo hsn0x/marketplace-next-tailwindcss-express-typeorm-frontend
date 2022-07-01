@@ -7,8 +7,12 @@ import productCreate from "./productCreate";
 import users from "./users";
 import auth from "./auth";
 import carts from "./carts";
-import members from "./members";
+
 import member from "./member";
+import members from "./members";
+
+import category from "./category";
+import categories from "./categories";
 
 const reducers = combineReducers({
     market,
@@ -19,8 +23,12 @@ const reducers = combineReducers({
     users,
     auth,
     carts,
+
     members,
     member,
+
+    categories,
+    category,
 });
 
 export default reducers;

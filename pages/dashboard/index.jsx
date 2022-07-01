@@ -9,6 +9,7 @@ const DashboarPage = ({ authUser }) => {
     useEffect(() => {
         dispatch(updateAuth(authUser));
     }, [authUser, dispatch]);
+
     return <div>Dashboard</div>;
 };
 
