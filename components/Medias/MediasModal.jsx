@@ -1,7 +1,7 @@
 import { Button, Modal } from "flowbite-react";
 import React from "react";
 
-const MediaModal = () => {
+const MediasModal = () => {
     return (
         <div>
             <Modal show={false} onClose={onClose}>
@@ -35,4 +35,4 @@ const MediaModal = () => {
     );
 };
 
-export default MediaModal;
+export default MediasModal;

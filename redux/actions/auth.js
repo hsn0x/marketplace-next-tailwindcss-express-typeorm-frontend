@@ -1,16 +1,24 @@
 export const updateIsAuthenticated = (isAuthenticated) => {
     return (dispatch) =>
         dispatch({
-            type: "UPDATE_IS_AUTH",
+            type: "UPDATE_IS_AUTHENTICATED",
             payload: isAuthenticated,
         });
 };
 
-export const updateAuth = (auth) => {
+export const updateAuth = (payload) => {
     return (dispatch) =>
         dispatch({
             type: "UPDATE_AUTH",
-            payload: auth,
+            payload,
+        });
+};
+
+export const updateProfile = (payload) => {
+    return (dispatch) =>
+        dispatch({
+            type: "UPDATE_PROFILE",
+            payload,
         });
 };
 

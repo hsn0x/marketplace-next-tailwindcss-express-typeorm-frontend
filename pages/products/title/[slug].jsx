@@ -22,6 +22,7 @@ const ProductPage = ({ params }) => {
 
     const dispatch = useDispatch();
     const { product, loading } = useSelector(({ product }) => product);
+    console.log({ product });
 
     const { productFetchFail, productFetchRequest, productFetchSuccess } =
         bindActionCreators(productActions, dispatch);

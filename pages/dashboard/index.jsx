@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { requireAuthentication } from "../../HOC/requireAuthentication";
-import { withSessionSsr } from "../../lib/withSession";
 import { updateAuth } from "../../redux/actions/auth";
 
 const DashboarPage = ({ authUser }) => {

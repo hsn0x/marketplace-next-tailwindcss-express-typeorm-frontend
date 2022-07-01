@@ -3,8 +3,9 @@ import { axiosClient, axiosServer } from "../../db/axios";
 import { Notify } from "notiflix";
 import { updateAuth, updateIsAuthenticated } from "../actions/auth";
 
-const UPDATE_IS_AUTH = "UPDATE_IS_AUTH";
+const UPDATE_IS_AUTHENTICATED = "UPDATE_IS_AUTHENTICATED";
 const UPDATE_AUTH = "UPDATE_AUTH";
+const UPDATE_PROFILE = "UPDATE_PROFILE";
 const UPDATE_EMAIL = "UPDATE_EMAIL";
 const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 const UPDATE_SIGN_IN = "UPDATE_SIGN_IN";
@@ -13,20 +14,22 @@ const UPDATE_SIGN_UP = "UPDATE_SIGN_UP";
 const initialState = {
     isAuthenticated: false,
     user: null,
+    profile: null,
     email: "j@me.com",
     password: "qwe",
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_IS_AUTH:
+        case UPDATE_IS_AUTHENTICATED:
             return {
                 ...state,
                 isAuthenticated: action.payload,
             };
         case UPDATE_AUTH:
-            console.log(action.payload);
             return { ...state, user: action.payload };
+        case UPDATE_PROFILE:
+            return { ...state, profile: action.payload };
         case UPDATE_EMAIL:
             return { ...state, email: action.payload };
         case UPDATE_PASSWORD:
@@ -57,7 +60,7 @@ export const signIn = () => async (dispatch, getState) => {
             pauseOnHover: true,
         });
         dispatch({
-            type: "UPDATE_IS_AUTH",
+            type: "UPDATE_IS_AUTHENTICATED",
             payload: signInData.isAuthenticated,
         });
         const { data: authUserData } = await axiosServer.get("/auth/me");
@@ -73,13 +76,16 @@ export const signIn = () => async (dispatch, getState) => {
     }
 };
 
-export const fetchProfile = () => {
+export const fetchProfile = (profile) => {
     return async (dispatch) => {
         try {
             const { data } = await axiosServer.get("/auth/me");
-
             dispatch({
                 type: "UPDATE_AUTH",
+                payload: data.user,
+            });
+            dispatch({
+                type: "UPDATE_PROFILE",
                 payload: data.user,
             });
             return data;
