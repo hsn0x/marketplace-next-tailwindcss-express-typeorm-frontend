@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const StorePageHeaderOwner = ({ username }) => {
+const MemberPageHeaderOwner = ({ username }) => {
     return (
         <div>
             <div className="flex justify-end -mt-6">
@@ -18,4 +18,4 @@ const StorePageHeaderOwner = ({ username }) => {
     );
 };
 
-export default StorePageHeaderOwner;
+export default MemberPageHeaderOwner;

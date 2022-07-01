@@ -2,7 +2,7 @@ import { Card } from "flowbite-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
-const StorePageHeaderImages = ({ images }) => {
+const MemberPageHeaderImages = ({ images }) => {
     const [marketImageSelected, selectMarketImage] = useState(0);
 
     return (
@@ -17,7 +17,7 @@ const StorePageHeaderImages = ({ images }) => {
                     height={200}
                 />
             </div>
-            <div className="flex flex-row gap-1">
+            <div className="grid grid-cols-5 gap-2">
                 {images.map((image, imageIndex) => (
                     <div
                         className="w-16 h-16 hover:scale-105 transition duration-300 cursor-pointer border-4 rounded-3xl overflow-hidden"
@@ -39,4 +39,4 @@ const StorePageHeaderImages = ({ images }) => {
     );
 };
 
-export default StorePageHeaderImages;
+export default MemberPageHeaderImages;
