@@ -37,6 +37,7 @@ const AdminCategoryBoxTreeAddNew = ({ category }) => {
             categoriesFetchFail(getError(error));
         }
     };
+
     const handleSaveNewCategory = async () => {
         try {
             await axiosServer.post("/categories", {

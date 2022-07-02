@@ -1,11 +1,16 @@
 import { Button, Card, Checkbox, Label } from "flowbite-react";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import { axiosServer } from "../../../db/axios";
 import { productCreateActions } from "../../../redux/actions";
+import { getError } from "../../../utils/error";
 
 const ProductCreatePageContentSubmit = () => {
     const dispatch = useDispatch();
+    const { create: productCreate } = useSelector(
+        ({ productCreate }) => productCreate
+    );
 
     const {
         productCreateUpdateTitle,
@@ -13,6 +18,16 @@ const ProductCreatePageContentSubmit = () => {
         productCreateUpdatePrice,
         productCreateUpdateQuantity,
     } = bindActionCreators(productCreateActions, dispatch);
+
+    const handleCreateProduct = async () => {
+        try {
+            await axiosServer.post("/products", productCreate);
+            console.log(productCreate);
+        } catch (error) {
+            getError(error);
+        }
+    };
+
     return (
         <div>
             {" "}
@@ -23,7 +38,7 @@ const ProductCreatePageContentSubmit = () => {
                         <div className="flex items-center gap-2">
                             <Checkbox id="accept" defaultChecked={true} />
                             <Label htmlFor="accept">
-                                I agree to the{" "}
+                                I agree to the
                                 <a
                                     href="/forms"
                                     className="text-blue-600 hover:underline dark:text-blue-500"
@@ -34,7 +49,12 @@ const ProductCreatePageContentSubmit = () => {
                         </div>
                     </div>
 
-                    <Button gradientMonochrome="info">Create Product</Button>
+                    <Button
+                        gradientMonochrome="info"
+                        onClick={() => handleCreateProduct()}
+                    >
+                        Create Product
+                    </Button>
                 </Card>
             </div>
         </div>

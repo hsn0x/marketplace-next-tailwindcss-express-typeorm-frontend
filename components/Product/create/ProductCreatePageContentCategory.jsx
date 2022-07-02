@@ -27,27 +27,62 @@ const ProductCreatePageContentCategory = () => {
         dispatch
     );
 
+    const handleCategorySelected = (value) => {
+        setCategorySelected(value);
+
+        const subCategory = handleCategoriesRootSub(value)[0]?.id;
+        setCategoryRootSubSelected(subCategory);
+
+        const subSubCategory = handleCategoriesRootSubSub(subCategory)[0]?.id;
+        setCategoryRootSubSubSelected(subSubCategory);
+
+        productCreateUpdateCategory([
+            parseInt(value),
+            parseInt(subCategory),
+            parseInt(subSubCategory),
+        ]);
+    };
+    const handleCategoryRootSubSelected = (value) => {
+        setCategoryRootSubSelected(value);
+
+        const subSubCategory = handleCategoriesRootSubSub(value)[0]?.id;
+        setCategoryRootSubSubSelected(subSubCategory);
+
+        productCreateUpdateCategory([
+            parseInt(categorySelected),
+            parseInt(value),
+            parseInt(subSubCategory),
+        ]);
+    };
+    const handleCategoryRootSubSubSelected = (value) => {
+        setCategoryRootSubSubSelected(value);
+        productCreateUpdateCategory([
+            parseInt(categorySelected),
+            parseInt(categorySubSelected),
+            parseInt(value),
+        ]);
+    };
+
     const handleCategoriesRoot = (categories) => {
         return categories.filter((category) => category.parentId === 0);
     };
     const handleCategoriesRootSub = (parentId) => {
+        parentId = parseInt(parentId);
         return parentId != 0
             ? categories.filter((category) => category.parentId === parentId)
             : [];
     };
     const handleCategoriesRootSubSub = (parentId) => {
+        parentId = parseInt(parentId);
         return parentId != 0
             ? categories.filter((category) => category.parentId === parentId)
             : [];
     };
 
     const categoriesRoot = handleCategoriesRoot(categories);
-    const categoriesRootSub = handleCategoriesRootSub(
-        parseInt(categorySelected)
-    );
-    const categoriesRootSubSub = handleCategoriesRootSubSub(
-        parseInt(categorySubSelected)
-    );
+    const categoriesRootSub = handleCategoriesRootSub(categorySelected);
+    const categoriesRootSubSub =
+        handleCategoriesRootSubSub(categorySubSelected);
     // const categoriesRootSubSub = handleCategoriesRootSub(categoriesRootSub);
 
     const CategoriesSelect = ({
@@ -70,10 +105,11 @@ const ProductCreatePageContentCategory = () => {
                                 id="category"
                                 required={true}
                                 onChange={(e) =>
-                                    setCategorySelected(e.target.value)
+                                    handleCategorySelected(e.target.value)
                                 }
                                 value={categorySelected}
                             >
+                                <option>Select Category</option>
                                 {categoriesRoot &&
                                     categoriesRoot.map((category) => (
                                         <option
@@ -98,7 +134,9 @@ const ProductCreatePageContentCategory = () => {
                                 id="category"
                                 required={true}
                                 onChange={(e) =>
-                                    setCategoryRootSubSelected(e.target.value)
+                                    handleCategoryRootSubSelected(
+                                        e.target.value
+                                    )
                                 }
                                 value={categorySubSelected}
                             >
@@ -127,7 +165,7 @@ const ProductCreatePageContentCategory = () => {
                                 id="category"
                                 required={true}
                                 onChange={(e) =>
-                                    setCategoryRootSubSubSelected(
+                                    handleCategoryRootSubSubSelected(
                                         e.target.value
                                     )
                                 }
