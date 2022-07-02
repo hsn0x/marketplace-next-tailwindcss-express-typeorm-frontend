@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { handleCategoriesTree } from "../../../lib/handleCategoriesTree";
 import AdminCategoryBoxTree from "../Category/AdminCategoryBoxTree";
+import AdminCategoryBoxTreeAddNew from "../Category/AdminCategoryBoxTreeAddNew";
 import AdminCategoriesBoxTreeName from "./AdminCategoriesBoxTreeName";
 
 const CategoriesBox = ({ categories }) => {
@@ -14,10 +15,14 @@ const CategoriesBox = ({ categories }) => {
         <div className="">
             <Card>
                 {
-                    <AdminCategoriesBoxTreeName
-                        oldCategoriesTree={[]}
-                        categoriesTree={categoriesTree}
-                    />
+                    <>
+                        <AdminCategoryBoxTreeAddNew category={{ id: 0 }} />
+                        <AdminCategoriesBoxTreeName
+                            oldCategoriesTree={[]}
+                            categoriesTree={categoriesTree}
+                        />
+                        <AdminCategoryBoxTreeAddNew category={{ id: 0 }} />
+                    </>
                 }
             </Card>
         </div>

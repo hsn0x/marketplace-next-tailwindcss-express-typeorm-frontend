@@ -15,11 +15,6 @@ const MediaPage = ({ authUser }) => {
     useEffect(() => {
         dispatch(updateAuth(authUser));
         dispatch(fetchProfile());
-
-        const fetchData = async () => {
-            await dispatch(fetchProfile());
-        };
-        fetchData();
     }, [authUser, dispatch]);
 
     return (

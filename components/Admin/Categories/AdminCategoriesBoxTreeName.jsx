@@ -23,7 +23,7 @@ const AdminCategoriesBoxTreeName = ({ oldCategoriesTree, categoriesTree }) => {
                                     ))}
 
                                 <AdminCategoryBoxTree category={r} />
-                                <AdminCategoryBoxTreeAddNew />
+                                <AdminCategoryBoxTreeAddNew category={r} />
                             </div>
                             {r.sub?.length > 0 && (
                                 <AdminCategoriesBoxTreeName

@@ -1,24 +1,56 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, TextInput } from "flowbite-react";
 import { FaPlus } from "react-icons/fa";
 import AdminCategoryBoxTreeAddNewModal from "./AdminCategoryBoxTreeAddNewModal";
 import { axiosServer } from "../../../db/axios";
-// import { AiFillDelete,AiFillEdit } from "@react-icons/all-files/fa/FaBeer";
+import Router from "next/router";
+import { getError } from "../../../utils/error";
+import { bindActionCreators } from "redux";
+import { categoriesActions } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
-const AdminCategoryBoxTreeAddNew = () => {
+const AdminCategoryBoxTreeAddNew = ({ category }) => {
+    const dispatch = useDispatch();
     const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
     const [newCategoryInput, setNewCategoryInput] = useState(false);
+
     function handleNewCategory() {
         setShowNewCategoryInput(true);
     }
-    function handleCancelNewCategory() {}
-    function handleSaveNewCategory() {
+    function handleCancelNewCategory() {
         setShowNewCategoryInput(false);
-        try {
-            axiosServer.post("/categories", newCategoryInput);
-        } catch (error) {}
     }
+
+    const {
+        categoriesFetchFail,
+        categoriesFetchRequest,
+        categoriesFetchSuccess,
+    } = bindActionCreators(categoriesActions, dispatch);
+
+    const fetchCategories = async () => {
+        categoriesFetchRequest();
+        try {
+            const { data } = await axiosServer.get("/categories");
+            categoriesFetchSuccess(data.categories);
+        } catch (error) {
+            categoriesFetchFail(getError(error));
+        }
+    };
+    const handleSaveNewCategory = async () => {
+        try {
+            await axiosServer.post("/categories", {
+                name: newCategoryInput,
+                parentId: category.id,
+            });
+            fetchCategories();
+
+            setShowNewCategoryInput(false);
+        } catch (error) {}
+    };
+
+    useEffect(() => {}, []);
+
     return (
         <div className="flex">
             <div className="mr-2">
@@ -51,14 +83,14 @@ const AdminCategoryBoxTreeAddNew = () => {
                     <>
                         <Button
                             color="info"
-                            onClick={() => handleCancelNewCategory()}
+                            onClick={() => handleSaveNewCategory()}
                         >
                             Save
                             <FaPlus />
                         </Button>
                         <Button
                             color="info"
-                            onClick={() => handleSaveNewCategory()}
+                            onClick={() => handleCancelNewCategory()}
                         >
                             Cancel
                             <FaPlus />

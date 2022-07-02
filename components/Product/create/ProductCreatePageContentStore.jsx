@@ -1,11 +1,17 @@
 import { Card, Label, Select } from "flowbite-react";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productCreateActions } from "../../../redux/actions";
+import { fetchProfile } from "../../../redux/reducers/auth";
 
 const ProductCreatePageContentStore = () => {
     const dispatch = useDispatch();
+    const profile = useSelector(({ auth }) => auth.profile);
+
+    useEffect(() => {
+        dispatch(fetchProfile());
+    }, []);
 
     const { productCreateUpdateStore } = bindActionCreators(
         productCreateActions,
@@ -13,7 +19,6 @@ const ProductCreatePageContentStore = () => {
     );
     return (
         <div>
-            {" "}
             <div className="">
                 <Card>
                     <div>
@@ -28,10 +33,12 @@ const ProductCreatePageContentStore = () => {
                                 productCreateUpdateStore(e.target.value)
                             }
                         >
-                            <option>Best Shop</option>
-                            <option>Techno 18</option>
-                            <option>Games Store</option>
-                            <option>Luxe Store</option>
+                            {profile &&
+                                profile.Markets.map((store) => (
+                                    <option key={store.id} value={store.id}>
+                                        {store.name}
+                                    </option>
+                                ))}
                         </Select>
                     </div>
                 </Card>
