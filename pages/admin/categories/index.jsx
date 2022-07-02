@@ -8,11 +8,11 @@ import { getError } from "../../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
 import CategoryBox from "../../../components/Category/CategoryBox";
-import CategoriesPageTitle from "../../../components/Categories/CategoriesPageTitle";
-import CategoriesPageLoading from "../../../components/Categories/CategoriesPageLoading";
+import CategoriesPageTitle from "../../../components/Admin/Categories/AdminCategoriesPageTitle";
+import CategoriesPageLoading from "../../../components/Admin/Categories/AdminCategoriesPageLoading";
 import { notRequireAuthentication } from "../../../HOC/notRequireAuthentication";
 import { updateAuth } from "../../../redux/actions/auth";
-import CategoriesBox from "../../../components/Categories/CategoriesBox";
+import CategoriesBox from "../../../components/Admin/Categories/AdminCategoriesBox";
 
 const CategoriesPage = ({ authUser }) => {
     const dispatch = useDispatch();

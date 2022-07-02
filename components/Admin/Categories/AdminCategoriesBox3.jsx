@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const CategoriesBox = ({ categories }) => {
+const CategoriesBox3 = ({ categories }) => {
     const [categoriesBoxOrganized, setCategoriesBoxOrganized] = useState({
         parents: [],
     });
@@ -142,6 +142,12 @@ const CategoriesBox = ({ categories }) => {
             //  categories.filter((category) => category.parentId == 0);
         };
 
+        const handleCategoriesParent = (categories, parentId) => {
+            return categories.filter(
+                (category) => category.parentId == parentId
+            );
+        };
+
         handleCategoriesBoxOrganized(categories);
         console.log({ categoriesLevels });
         setCategoriesBoxOrganized(categoriesLevels);
@@ -218,4 +224,4 @@ export async function getServerSideProps(context) {
     };
 }
 
-export default CategoriesBox;
+export default CategoriesBox3;
