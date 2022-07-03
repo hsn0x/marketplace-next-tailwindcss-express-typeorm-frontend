@@ -58,7 +58,7 @@ const ProductCreatePageContentInformations = () => {
                             placeholder="Product Price"
                             required={true}
                             onChange={(e) =>
-                                productCreateUpdatePrice(Number(e.target.value))
+                                productCreateUpdatePrice(e.target.value)
                             }
                         />
                     </div>

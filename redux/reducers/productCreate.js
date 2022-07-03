@@ -35,12 +35,12 @@ const reducer = (state = initialState, action) => {
         case PRODUCT_CREATE_UPDATE_CATEGORY:
             return {
                 ...state,
-                create: { ...state.create, category: action.payload },
+                create: { ...state.create, CategoriesIds: action.payload },
             };
         case PRODUCT_CREATE_UPDATE_STORE:
             return {
                 ...state,
-                create: { ...state.create, store: action.payload },
+                create: { ...state.create, MarketId: action.payload },
             };
         case PRODUCT_CREATE_UPDATE_MEDIA:
             return {

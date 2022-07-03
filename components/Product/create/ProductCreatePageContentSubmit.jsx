@@ -21,8 +21,17 @@ const ProductCreatePageContentSubmit = () => {
 
     const handleCreateProduct = async () => {
         try {
-            await axiosServer.post("/products", productCreate);
-            console.log(productCreate);
+            const productCreateData = {
+                ...productCreate,
+                price: Number(productCreate.price),
+                quantity: Number(productCreate.quantity),
+                MarketId: Number(productCreate.MarketId),
+                CategoriesIds: productCreate.CategoriesIds.filter(
+                    (p) => !isNaN(p)
+                ),
+            };
+            console.log(productCreateData);
+            await axiosServer.post("/products", productCreateData);
         } catch (error) {
             getError(error);
         }

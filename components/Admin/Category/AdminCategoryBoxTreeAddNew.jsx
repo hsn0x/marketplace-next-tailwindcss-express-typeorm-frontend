@@ -31,7 +31,7 @@ const AdminCategoryBoxTreeAddNew = ({ category }) => {
     const fetchCategories = async () => {
         categoriesFetchRequest();
         try {
-            const { data } = await axiosServer.get("/categories");
+            const { data } = await axiosServer.get("/categories/type/product");
             categoriesFetchSuccess(data.categories);
         } catch (error) {
             categoriesFetchFail(getError(error));
@@ -43,6 +43,7 @@ const AdminCategoryBoxTreeAddNew = ({ category }) => {
             await axiosServer.post("/categories", {
                 name: newCategoryInput,
                 parentId: category.id,
+                type: "product",
             });
             fetchCategories();
 

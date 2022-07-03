@@ -14,6 +14,7 @@ const ProductCreatePageContentCategory = () => {
     const [categorySelected, setCategorySelected] = useState(0);
     const [categorySubSelected, setCategoryRootSubSelected] = useState(0);
     const [categorySubSubSelected, setCategoryRootSubSubSelected] = useState(0);
+
     const { categories, loading } = useSelector(({ categories }) => categories);
 
     const {
@@ -191,7 +192,9 @@ const ProductCreatePageContentCategory = () => {
         const fetchCategories = async () => {
             categoriesFetchRequest();
             try {
-                const { data } = await axiosServer.get("/categories");
+                const { data } = await axiosServer.get(
+                    "/categories/type/product"
+                );
                 categoriesFetchSuccess(data.categories);
             } catch (error) {
                 categoriesFetchFail(getError(error));
