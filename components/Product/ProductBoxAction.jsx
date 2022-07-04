@@ -2,8 +2,13 @@ import { Button } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { axiosServer } from "../../db/axios";
 
 const ProductBoxAction = ({ user, product }) => {
+    const handleProductDelete = async (productId) => {
+        await axiosServer.delete(`/products/${productId}`);
+    };
+
     return (
         <div>
             {user && user.id === product.UserId && (
@@ -24,7 +29,7 @@ const ProductBoxAction = ({ user, product }) => {
                             <Button
                                 size="xs"
                                 color="failure"
-                                onClick={() => handleProductDelete()}
+                                onClick={() => handleProductDelete(product.id)}
                             >
                                 Delete
                                 <FaTrash />
