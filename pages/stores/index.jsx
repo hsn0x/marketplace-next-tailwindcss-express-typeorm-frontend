@@ -12,7 +12,7 @@ import StorePageTitle from "../../components/Stores/StoresPageTitle";
 import StorePageLoading from "../../components/Stores/StoresPageLoading";
 import StoresBox from "../../components/Stores/StoresBox";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
-import { updateAuth } from "../../redux/actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 
 const Markets = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const Markets = ({ authUser }) => {
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
         const fetchMarkets = async () => {
             marketsFetchRequest();
             try {

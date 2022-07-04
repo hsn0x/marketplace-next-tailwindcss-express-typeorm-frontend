@@ -74,8 +74,9 @@ const MarketPage = ({ params }) => {
 
                     <div>
                         <StorePageTabs
-                            Products={market.Products}
+                            products={market.Products}
                             about={market.about}
+                            market={market}
                         />
                     </div>
                 </div>

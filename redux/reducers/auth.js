@@ -1,7 +1,11 @@
 import axios from "axios";
 import { axiosClient, axiosServer } from "../../db/axios";
 import { Notify } from "notiflix";
-import { updateAuth, updateIsAuthenticated } from "../actions/auth";
+import {
+    updateAuth,
+    updateIsAuthenticated,
+    updateProfile,
+} from "../actions/auth";
 
 const UPDATE_IS_AUTHENTICATED = "UPDATE_IS_AUTHENTICATED";
 const UPDATE_AUTH = "UPDATE_AUTH";
@@ -47,10 +51,14 @@ export const signIn = () => async (dispatch, getState) => {
     const { email, password } = getState().auth;
     const data = { email, password };
     try {
-        const { data: signInData } = await axiosServer.post(
-            "/auth/login",
-            data
-        );
+        // const { data: signInData } = await axiosServer.post(
+        //     "/auth/login",
+        //     data
+        // );
+        const { data: signInData } = await axiosServer.post("/auth/login", {
+            email: "j@me.com",
+            password: "qwe",
+        });
         Notify.success(signInData?.message || "Login Successful", {
             position: "right-bottom",
             width: "280px",
@@ -65,6 +73,7 @@ export const signIn = () => async (dispatch, getState) => {
         });
         const { data: authUserData } = await axiosServer.get("/auth/me");
         await axiosClient.post("/auth/signin", authUserData);
+
         return signInData;
     } catch (error) {
         Notify.failure(error.response?.data?.message || "Sign in error", {
@@ -125,6 +134,8 @@ export const signOut = (e) => {
             await axiosServer.get("/auth/logout");
             await axiosClient.get("/auth/signout");
             dispatch(updateAuth(null));
+            dispatch(updateIsAuthenticated(false));
+            dispatch(updateProfile(null));
             Notify.success("Logged out", {
                 position: "center",
                 timeout: 2000,

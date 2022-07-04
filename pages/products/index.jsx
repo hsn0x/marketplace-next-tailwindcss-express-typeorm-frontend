@@ -11,7 +11,7 @@ import ProductBox from "../../components/Product/ProductBox";
 import ProductPageTitle from "../../components/Products/ProductsPageTitle";
 import ProductPageLoading from "../../components/Products/ProductsPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
-import { updateAuth } from "../../redux/actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import ProductsBox from "../../components/Products/ProductsBox";
 
 const Products = ({ authUser }) => {
@@ -23,6 +23,7 @@ const Products = ({ authUser }) => {
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
         const fetchProducts = async () => {
             productsFetchRequest();
             try {

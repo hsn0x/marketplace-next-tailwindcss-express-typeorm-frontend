@@ -16,7 +16,7 @@ const LoginScreen = () => {
 
     const dispatch = useDispatch();
 
-    const { updateAuth, updateEmail, updatePassword } = bindActionCreators(
+    const { updateEmail, updatePassword } = bindActionCreators(
         authActions,
         dispatch
     );
@@ -54,9 +54,9 @@ const LoginScreen = () => {
                                     updateEmail(event.target.value)
                                 }
                                 id="email"
-                                type="email"
+                                type="text"
                                 placeholder="Email"
-                                required={true}
+                                // required={true}
                             />
                         </div>
                         <div>
@@ -72,11 +72,14 @@ const LoginScreen = () => {
                                 }
                                 id="password1"
                                 type="password"
-                                required={true}
+                                // required={true}
                             />
                         </div>
                         <div className="flex items-center gap-2">
-                            <Checkbox id="remember" required={true} />
+                            <Checkbox
+                                id="remember"
+                                //  required={true}
+                            />
                             <Label htmlFor="remember">Remember me</Label>
                         </div>
                         <Button gradientMonochrome="info" type="submit">

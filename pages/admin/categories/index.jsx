@@ -11,7 +11,7 @@ import CategoryBox from "../../../components/Category/CategoryBox";
 import CategoriesPageTitle from "../../../components/Admin/Categories/AdminCategoriesPageTitle";
 import CategoriesPageLoading from "../../../components/Admin/Categories/AdminCategoriesPageLoading";
 import { notRequireAuthentication } from "../../../HOC/notRequireAuthentication";
-import { updateAuth } from "../../../redux/actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
 import CategoriesBox from "../../../components/Admin/Categories/AdminCategoriesBox";
 
 const CategoriesPage = ({ authUser }) => {
@@ -26,6 +26,7 @@ const CategoriesPage = ({ authUser }) => {
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
         const fetchCategories = async () => {
             categoriesFetchRequest();
             try {

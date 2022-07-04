@@ -11,7 +11,7 @@ import MemberBox from "../../components/Member/MemberBox";
 import MemberPageTitle from "../../components/Members/MembersPageTitle";
 import MemberPageLoading from "../../components/Members/MembersPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
-import { updateAuth } from "../../redux/actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import MembersBox from "../../components/Members/MembersBox";
 
 const Members = ({ authUser }) => {
@@ -23,6 +23,7 @@ const Members = ({ authUser }) => {
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
         const fetchMembers = async () => {
             membersFetchRequest();
             try {

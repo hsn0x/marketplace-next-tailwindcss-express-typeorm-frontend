@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { notRequireAuthentication } from "../HOC/notRequireAuthentication";
-import { updateAuth } from "../redux/actions/auth";
+import { updateAuth, updateIsAuthenticated } from "../redux/actions/auth";
 import { getUser } from "../redux/reducers/users";
 
 const HomePage = ({ authUser }) => {
@@ -9,6 +9,7 @@ const HomePage = ({ authUser }) => {
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
     }, [authUser, dispatch]);
 
     return <div>HomePage</div>;

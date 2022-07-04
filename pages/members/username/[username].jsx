@@ -21,11 +21,8 @@ import { getError } from "../../../utils/error";
 
 const MemberUsernamePage = ({ params }) => {
     const { username } = params;
-
     const dispatch = useDispatch();
-
     const { member, loading } = useSelector(({ member }) => member);
-
     const { memberFetchFail, memberFetchRequest, memberFetchSuccess } =
         bindActionCreators(memberActions, dispatch);
 

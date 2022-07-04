@@ -2,13 +2,13 @@ import { Card, Tabs } from "flowbite-react";
 import React from "react";
 import ProductsBox from "../Products/ProductsBox";
 
-const StorePageTabs = ({ Products, about }) => {
+const StorePageTabs = ({ products, about }) => {
     return (
         <div>
             <Card>
                 <Tabs.Group aria-label="Pills" style="pills">
                     <Tabs.Item active={true} title="Products">
-                        <ProductsBox products={Products} />
+                        <ProductsBox products={products} />
                     </Tabs.Item>
                     <Tabs.Item title="About">
                         <div className="mb-6">
