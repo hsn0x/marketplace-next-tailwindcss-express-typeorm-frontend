@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import ProductCreatePage from "../../components/Product/create/ProductCreatePage";
+import ProductCreatePage from "../../../components/Product/create/ProductCreatePage";
 import { useDispatch } from "react-redux";
-import { requireAuthentication } from "../../HOC/requireAuthentication";
-import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
+import { requireAuthentication } from "../../../HOC/requireAuthentication";
+import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
 
 const CreateProductPage = ({ authUser }) => {
     const dispatch = useDispatch();

@@ -3,7 +3,10 @@ import market from "./market";
 import markets from "./markets";
 import products from "./products";
 import product from "./product";
+
 import productCreate from "./productCreate";
+import productEdit from "./productEdit";
+
 import users from "./users";
 import auth from "./auth";
 import carts from "./carts";
@@ -17,9 +20,13 @@ import categories from "./categories";
 const reducers = combineReducers({
     market,
     markets,
-    product,
+
     productCreate,
+    productEdit,
+
+    product,
     products,
+
     users,
     auth,
     carts,

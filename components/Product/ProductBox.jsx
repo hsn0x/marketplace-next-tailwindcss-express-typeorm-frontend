@@ -1,14 +1,18 @@
 import { Card, Carousel } from "flowbite-react";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
+import { requireAuthentication } from "../../HOC/requireAuthentication";
 import StoreBoxIntro from "../Store/StoreBoxIntro";
+import ProductBoxAction from "./ProductBoxAction";
 import ProductBoxDescription from "./ProductBoxDescription";
 import ProductBoxImages from "./ProductBoxImages";
 import ProductBoxIntro from "./ProductBoxIntro";
 import ProductBoxPrice from "./ProductBoxPrice";
 import ProductBoxTitle from "./ProductBoxTitle";
 
-const ProductBox = ({ product }) => {
+const ProductBox = ({ product, authUser }) => {
+    const { user } = useSelector(({ auth }) => auth);
     return (
         <div className="hover:scale-105 transition duration-300">
             <Card style={{ height: "100%" }}>
@@ -28,10 +32,15 @@ const ProductBox = ({ product }) => {
                     )}
                     <ProductBoxDescription description={product.description} />
                     <ProductBoxPrice price={product.price} />
+                    <ProductBoxAction product={product} user={user} />
                 </div>
             </Card>
         </div>
     );
 };
+
+export const getServerSideProps = requireAuthentication((context) => {
+    return {};
+});
 
 export default ProductBox;
