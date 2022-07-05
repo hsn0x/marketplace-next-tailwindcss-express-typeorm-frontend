@@ -17,7 +17,11 @@ import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 const Markets = ({ authUser }) => {
     const dispatch = useDispatch();
     const { markets, loading } = useSelector(({ markets }) => markets);
-
+    const {
+        markets: searchMarkets,
+        query,
+        loading: searchLoading,
+    } = useSelector(({ marketsSearch }) => marketsSearch);
     const { marketsFetchFail, marketsFetchRequest, marketsFetchSuccess } =
         bindActionCreators(marketsActions, dispatch);
 
@@ -40,7 +44,11 @@ const Markets = ({ authUser }) => {
         <div>
             <StorePageLoading loading={loading} />
             <StorePageTitle title="All Stores" />
-            <StoresBox markets={markets} />
+            {searchMarkets && searchMarkets.length > 0 ? (
+                <StoresBox markets={searchMarkets} />
+            ) : (
+                <StoresBox markets={markets} />
+            )}
         </div>
     );
 };

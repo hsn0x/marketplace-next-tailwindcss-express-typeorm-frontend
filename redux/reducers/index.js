@@ -1,8 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import market from "./market";
 import markets from "./markets";
+import marketsSearch from "./marketsSearch";
 
+import market from "./market";
 import marketCreate from "./marketCreate";
 import marketEdit from "./marketEdit";
 
@@ -28,9 +29,10 @@ import category from "./category";
 import categories from "./categories";
 
 const reducers = combineReducers({
-    market,
     markets,
+    marketsSearch,
 
+    market,
     marketCreate,
     marketEdit,
 
