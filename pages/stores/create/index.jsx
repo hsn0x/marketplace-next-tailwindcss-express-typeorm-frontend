@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
+import StoreCreatePage from "../../../components/Store/create/StoreCreatePage";
 import { useDispatch } from "react-redux";
-import StoreCreate from "../../components/Store/StoreCreate";
-import { requireAuthentication } from "../../HOC/requireAuthentication";
-import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
+import { requireAuthentication } from "../../../HOC/requireAuthentication";
+import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
 
-const CreateMarket = ({ authUser }) => {
+const CreateStorePage = ({ authUser }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const CreateMarket = ({ authUser }) => {
     return (
         <div className="max-w-4xl mx-auto">
             <div className="my-20">
-                <StoreCreate />
+                <StoreCreatePage />
             </div>
         </div>
     );
@@ -25,4 +25,4 @@ export const getServerSideProps = requireAuthentication((context) => {
     return {};
 });
 
-export default CreateMarket;
+export default CreateStorePage;

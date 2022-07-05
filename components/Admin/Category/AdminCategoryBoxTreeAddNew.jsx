@@ -10,7 +10,7 @@ import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 
-const AdminCategoryBoxTreeAddNew = ({ category }) => {
+const AdminCategoryBoxTreeAddNew = ({ category, categoryType }) => {
     const dispatch = useDispatch();
     const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
     const [newCategoryInput, setNewCategoryInput] = useState(false);
@@ -31,7 +31,9 @@ const AdminCategoryBoxTreeAddNew = ({ category }) => {
     const fetchCategories = async () => {
         categoriesFetchRequest();
         try {
-            const { data } = await axiosServer.get("/categories/type/product");
+            const { data } = await axiosServer.get(
+                `/categories/type/${categoryType}`
+            );
             categoriesFetchSuccess(data.categories);
         } catch (error) {
             categoriesFetchFail(getError(error));
@@ -40,13 +42,18 @@ const AdminCategoryBoxTreeAddNew = ({ category }) => {
 
     const handleSaveNewCategory = async () => {
         try {
+            console.log({
+                name: newCategoryInput,
+                parentId: category.id,
+                type: categoryType,
+            });
             await axiosServer.post("/categories", {
                 name: newCategoryInput,
                 parentId: category.id,
-                type: "product",
+                type: categoryType,
             });
-            fetchCategories();
 
+            fetchCategories();
             setShowNewCategoryInput(false);
         } catch (error) {}
     };

@@ -8,7 +8,7 @@ import { categoriesActions } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
 import { axiosServer } from "../../../db/axios";
 
-const AdminCategoryBoxTree = ({ category }) => {
+const AdminCategoryBoxTree = ({ category, categoryType }) => {
     const dispatch = useDispatch();
 
     const {
@@ -20,7 +20,9 @@ const AdminCategoryBoxTree = ({ category }) => {
     const fetchCategories = async () => {
         categoriesFetchRequest();
         try {
-            const { data } = await axiosServer.get("/categories/type/product");
+            const { data } = await axiosServer.get(
+                `/categories/type/${categoryType}`
+            );
             categoriesFetchSuccess(data.categories);
         } catch (error) {
             categoriesFetchFail(getError(error));

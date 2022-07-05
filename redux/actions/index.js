@@ -10,6 +10,9 @@ export * as productEditActions from "./productEdit";
 export * as marketsActions from "./markets";
 export * as marketActions from "./market";
 
+export * as marketCreateActions from "./marketCreate";
+export * as marketEditActions from "./marketEdit";
+
 export * as memberActions from "./member";
 export * as membersActions from "./members";
 

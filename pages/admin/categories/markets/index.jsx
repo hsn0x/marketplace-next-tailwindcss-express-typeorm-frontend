@@ -1,18 +1,21 @@
 import React, { useEffect, useRef } from "react";
 import axios from "axios";
-import { axiosServer } from "../../../db/axios";
+import { axiosServer } from "../../../../db/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { categoriesActions } from "../../../redux/actions";
+import { categoriesActions } from "../../../../redux/actions";
 import { bindActionCreators } from "redux";
-import { getError } from "../../../utils/error";
+import { getError } from "../../../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
-import CategoryBox from "../../../components/Category/CategoryBox";
-import CategoriesPageTitle from "../../../components/Admin/Categories/AdminCategoriesPageTitle";
-import CategoriesPageLoading from "../../../components/Admin/Categories/AdminCategoriesPageLoading";
-import { notRequireAuthentication } from "../../../HOC/notRequireAuthentication";
-import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
-import CategoriesBox from "../../../components/Admin/Categories/AdminCategoriesBox";
+import CategoryBox from "../../../../components/Category/CategoryBox";
+import CategoriesPageTitle from "../../../../components/Admin/Categories/AdminCategoriesPageTitle";
+import CategoriesPageLoading from "../../../../components/Admin/Categories/AdminCategoriesPageLoading";
+import { notRequireAuthentication } from "../../../../HOC/notRequireAuthentication";
+import {
+    updateAuth,
+    updateIsAuthenticated,
+} from "../../../../redux/actions/auth";
+import CategoriesBox from "../../../../components/Admin/Categories/AdminCategoriesBox";
 
 const CategoriesPage = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -31,7 +34,7 @@ const CategoriesPage = ({ authUser }) => {
             categoriesFetchRequest();
             try {
                 const { data } = await axiosServer.get(
-                    "/categories/type/product"
+                    "/categories/type/market"
                 );
                 categoriesFetchSuccess(data.categories);
             } catch (error) {
@@ -45,7 +48,7 @@ const CategoriesPage = ({ authUser }) => {
         <div>
             <CategoriesPageLoading loading={loading} />
             <CategoriesPageTitle title="All Categories" />
-            {<CategoriesBox categories={categories} />}
+            {<CategoriesBox categories={categories} categoryType="market" />}
         </div>
     );
 };

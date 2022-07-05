@@ -6,7 +6,7 @@ import AdminCategoryBoxTree from "../Category/AdminCategoryBoxTree";
 import AdminCategoryBoxTreeAddNew from "../Category/AdminCategoryBoxTreeAddNew";
 import AdminCategoriesBoxTreeName from "./AdminCategoriesBoxTreeName";
 
-const CategoriesBox = ({ categories }) => {
+const CategoriesBox = ({ categories, categoryType }) => {
     const categoriesTree = handleCategoriesTree(categories);
 
     useEffect(() => {}, []);
@@ -14,16 +14,21 @@ const CategoriesBox = ({ categories }) => {
     return (
         <div className="">
             <Card>
-                {
-                    <>
-                        <AdminCategoryBoxTreeAddNew category={{ id: 0 }} />
-                        <AdminCategoriesBoxTreeName
-                            oldCategoriesTree={[]}
-                            categoriesTree={categoriesTree}
-                        />
-                        <AdminCategoryBoxTreeAddNew category={{ id: 0 }} />
-                    </>
-                }
+                <>
+                    {/* <AdminCategoryBoxTreeAddNew
+                        category={{ id: 0 }}
+                        categoryType={categoryType}
+                    /> */}
+                    <AdminCategoriesBoxTreeName
+                        oldCategoriesTree={[]}
+                        categoriesTree={categoriesTree}
+                        categoryType={categoryType}
+                    />
+                    {/* <AdminCategoryBoxTreeAddNew
+                        category={{ id: 0 }}
+                        categoryType={categoryType}
+                    /> */}
+                </>
             </Card>
         </div>
     );

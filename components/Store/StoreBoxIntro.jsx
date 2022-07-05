@@ -9,7 +9,7 @@ const StoreBoxIntro = ({ avatars, name, username, slug }) => {
                 <div className="bg-gray-100 rounded-xl p-2">
                     <h2 className="">
                         <Avatar
-                            img={avatars[0].url}
+                            img={avatars[0]?.url}
                             rounded={true}
                             bordered={true}
                             size="lg"

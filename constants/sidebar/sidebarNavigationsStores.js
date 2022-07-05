@@ -27,6 +27,18 @@ export const sidebarNavigationsStores = [
             {
                 id: uuid(),
                 icon: FaStore,
+                label: "My Stores",
+                slug: "stores-my",
+                href: "/stores/my",
+                hrefMethod: () => router.push("/stores/my"),
+                active: false,
+                show: true,
+                children: [],
+                method: null,
+            },
+            {
+                id: uuid(),
+                icon: FaStore,
                 label: "Create Store",
                 slug: "stores-create",
                 href: "/stores/create",

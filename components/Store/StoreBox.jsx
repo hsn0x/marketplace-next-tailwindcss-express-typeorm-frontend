@@ -2,12 +2,16 @@ import { Avatar, Card, Carousel } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
+import StoreBoxAction from "./StoreBoxAction";
 import StoreBoxDescription from "./StoreBoxDescription";
 import StoreBoxImages from "./StoreBoxImages";
 import StoreBoxIntro from "./StoreBoxIntro";
 import StoreBoxTitle from "./StoreBoxTitle";
 
 const StoreBox = ({ market }) => {
+    const { user } = useSelector(({ auth }) => auth);
+
     return (
         <div className="hover:scale-105 transition duration-300">
             <Card style={{ height: "100%" }}>
@@ -25,6 +29,7 @@ const StoreBox = ({ market }) => {
                         slug={market.slug}
                     />
                     <StoreBoxDescription description={market.description} />
+                    <StoreBoxAction store={market} user={user} />
                 </div>
             </Card>
         </div>

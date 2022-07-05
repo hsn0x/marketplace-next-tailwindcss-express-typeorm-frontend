@@ -3,7 +3,11 @@ import AdminCategoryBoxTree from "../Category/AdminCategoryBoxTree";
 import { Card } from "flowbite-react";
 import AdminCategoryBoxTreeAddNew from "../Category/AdminCategoryBoxTreeAddNew";
 
-const AdminCategoriesBoxTreeName = ({ oldCategoriesTree, categoriesTree }) => {
+const AdminCategoriesBoxTreeName = ({
+    oldCategoriesTree,
+    categoriesTree,
+    categoryType,
+}) => {
     return (
         <div>
             <div className="grid gap-4">
@@ -23,7 +27,10 @@ const AdminCategoriesBoxTreeName = ({ oldCategoriesTree, categoriesTree }) => {
                                     ))}
 
                                 <AdminCategoryBoxTree category={r} />
-                                <AdminCategoryBoxTreeAddNew category={r} />
+                                <AdminCategoryBoxTreeAddNew
+                                    category={r}
+                                    categoryType={categoryType}
+                                />
                             </div>
                             {r.sub?.length > 0 && (
                                 <AdminCategoriesBoxTreeName
@@ -32,6 +39,7 @@ const AdminCategoriesBoxTreeName = ({ oldCategoriesTree, categoriesTree }) => {
                                         r,
                                     ]}
                                     categoriesTree={r.sub}
+                                    categoryType={categoryType}
                                 />
                             )}
                         </Card>
