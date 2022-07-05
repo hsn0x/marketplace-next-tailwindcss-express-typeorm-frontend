@@ -17,6 +17,11 @@ import ProductsBox from "../../components/Products/ProductsBox";
 const Products = ({ authUser }) => {
     const dispatch = useDispatch();
     const { products, loading } = useSelector(({ products }) => products);
+    const {
+        products: searchProducts,
+        query,
+        loading: searchLoading,
+    } = useSelector(({ productsSearch }) => productsSearch);
 
     const { productsFetchFail, productsFetchRequest, productsFetchSuccess } =
         bindActionCreators(productsActions, dispatch);
@@ -40,7 +45,11 @@ const Products = ({ authUser }) => {
         <div>
             <ProductPageLoading loading={loading} />
             <ProductPageTitle title="All Products" />
-            <ProductsBox products={products} />
+            {searchProducts && searchProducts.length > 0 ? (
+                <ProductsBox products={searchProducts} />
+            ) : (
+                <ProductsBox products={products} />
+            )}
         </div>
     );
 };

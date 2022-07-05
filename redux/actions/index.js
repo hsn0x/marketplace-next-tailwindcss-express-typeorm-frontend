@@ -5,8 +5,9 @@ export * as loginActions from "./login";
 export * as registerActions from "./register";
 
 export * as productsActions from "./products";
-export * as productActions from "./product";
+export * as productsSearchActions from "./productsSearch";
 
+export * as productActions from "./product";
 export * as productCreateActions from "./productCreate";
 export * as productEditActions from "./productEdit";
 

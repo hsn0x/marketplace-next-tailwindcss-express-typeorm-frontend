@@ -7,8 +7,9 @@ import marketCreate from "./marketCreate";
 import marketEdit from "./marketEdit";
 
 import products from "./products";
-import product from "./product";
+import productsSearch from "./productsSearch";
 
+import product from "./product";
 import productCreate from "./productCreate";
 import productEdit from "./productEdit";
 
@@ -33,11 +34,12 @@ const reducers = combineReducers({
     marketCreate,
     marketEdit,
 
-    productCreate,
-    productEdit,
+    products,
+    productsSearch,
 
     product,
-    products,
+    productCreate,
+    productEdit,
 
     users,
     auth,
