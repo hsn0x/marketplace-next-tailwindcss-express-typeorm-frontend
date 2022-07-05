@@ -97,7 +97,7 @@ const NavbarScreen = () => {
                     label={
                         <Avatar
                             alt="User settings"
-                            img={auth.profile?.avatars[0].url}
+                            img={auth.profile?.avatars[0]?.url}
                             rounded={true}
                             size="md"
                         />

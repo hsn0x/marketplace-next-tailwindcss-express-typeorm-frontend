@@ -7,7 +7,7 @@ const MemberPageHeaderAvatar = ({ avatars, firstName, lastName, username }) => {
             <div className="grid place-items-center">
                 <div className=" bg-white rounded-full z-10 text-center hover:scale-105 transition duration-300">
                     <Avatar
-                        img={avatars[0].url}
+                        img={avatars[0]?.url}
                         rounded={true}
                         bordered={true}
                         size="xl"

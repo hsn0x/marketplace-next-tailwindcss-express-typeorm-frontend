@@ -18,8 +18,10 @@ import MemberPageTabs from "../../../components/Member/MemberPageTabs";
 import { axiosServer } from "../../../db/axios";
 import { memberActions } from "../../../redux/actions";
 import { getError } from "../../../utils/error";
+import { notRequireAuthentication } from "../../../HOC/notRequireAuthentication";
+import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
 
-const MemberUsernamePage = ({ params }) => {
+const MemberUsernamePage = ({ params, authUser }) => {
     const { username } = params;
     const dispatch = useDispatch();
     const { member, loading } = useSelector(({ member }) => member);
@@ -27,6 +29,8 @@ const MemberUsernamePage = ({ params }) => {
         bindActionCreators(memberActions, dispatch);
 
     useEffect(() => {
+        dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
         const fetchMember = async () => {
             memberFetchRequest();
             try {
@@ -81,10 +85,10 @@ const MemberUsernamePage = ({ params }) => {
     );
 };
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps = notRequireAuthentication(({ params }) => {
     return {
-        props: { params },
+        params,
     };
-}
+});
 
 export default MemberUsernamePage;

@@ -19,8 +19,8 @@ const initialState = {
     isAuthenticated: false,
     user: null,
     profile: null,
-    email: "j@me.com",
-    password: "qwe",
+    email: "",
+    password: "",
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,43 +47,43 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export const signIn = () => async (dispatch, getState) => {
-    const { email, password } = getState().auth;
-    const data = { email, password };
-    try {
-        // const { data: signInData } = await axiosServer.post(
-        //     "/auth/login",
-        //     data
-        // );
-        const { data: signInData } = await axiosServer.post("/auth/login", {
-            email: "j@me.com",
-            password: "qwe",
-        });
-        Notify.success(signInData?.message || "Login Successful", {
-            position: "right-bottom",
-            width: "280px",
-            distance: "10px",
-            opacity: 1,
-            timeout: 2000,
-            pauseOnHover: true,
-        });
-        dispatch({
-            type: "UPDATE_IS_AUTHENTICATED",
-            payload: signInData.isAuthenticated,
-        });
-        const { data: authUserData } = await axiosServer.get("/auth/me");
-        await axiosClient.post("/auth/signin", authUserData);
+// export const signIn = () => async (dispatch, getState) => {
+//     const { email, password } = getState().auth;
+//     const data = { email, password };
+//     try {
+//         // const { data: signInData } = await axiosServer.post(
+//         //     "/auth/login",
+//         //     data
+//         // );
+//         const { data: signInData } = await axiosServer.post("/auth/login", {
+//             email: "j@me.com",
+//             password: "qwe",
+//         });
+//         Notify.success(signInData?.message || "Login Successful", {
+//             position: "right-bottom",
+//             width: "280px",
+//             distance: "10px",
+//             opacity: 1,
+//             timeout: 2000,
+//             pauseOnHover: true,
+//         });
+//         dispatch({
+//             type: "UPDATE_IS_AUTHENTICATED",
+//             payload: signInData.isAuthenticated,
+//         });
+//         const { data: authUserData } = await axiosServer.get("/auth/me");
+//         await axiosClient.post("/auth/signin", authUserData);
 
-        return signInData;
-    } catch (error) {
-        Notify.failure(error.response?.data?.message || "Sign in error", {
-            position: "center",
-            timeout: 6000,
-            pauseOnHover: true,
-        });
-        return error.response.data;
-    }
-};
+//         return signInData;
+//     } catch (error) {
+//         Notify.failure(error.response?.data?.message || "Sign in error", {
+//             position: "center",
+//             timeout: 6000,
+//             pauseOnHover: true,
+//         });
+//         return error.response.data;
+//     }
+// };
 
 export const fetchProfile = (profile) => {
     return async (dispatch) => {
@@ -104,29 +104,29 @@ export const fetchProfile = (profile) => {
     };
 };
 
-export const signUp = () => async (dispatch, getState) => {
-    const { email, password } = getState().auth;
-    const data = { email, password };
-    try {
-        const response = await axiosClient.post("/auth/signup", {
-            email,
-            password,
-        });
-        Notify.success("Sign Up Successful", {
-            position: "center",
-            timeout: 2000,
-            pauseOnHover: true,
-            keepOnHover: true,
-        });
-    } catch (error) {
-        notifyMessage = error.response?.data?.message || "Sign Out Failed";
-        Notify.failure(error.response?.data?.message, {
-            position: "center",
-            timeout: 6000,
-            pauseOnHover: true,
-        });
-    }
-};
+// export const signUp = () => async (dispatch, getState) => {
+//     const { email, password } = getState().auth;
+//     const data = { email, password };
+//     try {
+//         const response = await axiosClient.post("/auth/signup", {
+//             email,
+//             password,
+//         });
+//         Notify.success("Sign Up Successful", {
+//             position: "center",
+//             timeout: 2000,
+//             pauseOnHover: true,
+//             keepOnHover: true,
+//         });
+//     } catch (error) {
+//         notifyMessage = error.response?.data?.message || "Sign Out Failed";
+//         Notify.failure(error.response?.data?.message, {
+//             position: "center",
+//             timeout: 6000,
+//             pauseOnHover: true,
+//         });
+//     }
+// };
 
 export const signOut = (e) => {
     return async (dispatch, getState) => {
@@ -137,16 +137,16 @@ export const signOut = (e) => {
             dispatch(updateIsAuthenticated(false));
             dispatch(updateProfile(null));
             Notify.success("Logged out", {
-                position: "center",
-                timeout: 2000,
+                position: "right-top",
+                timeout: 1000,
                 pauseOnHover: true,
                 keepOnHover: true,
             });
         } catch (error) {
             console.log(error);
             Notify.failure(error.response?.data?.message || "Sign Out Failed", {
-                position: "center",
-                timeout: 6000,
+                position: "right-top",
+                timeout: 1000,
                 pauseOnHover: true,
             });
             return null;

@@ -12,8 +12,12 @@ import product from "./product";
 import productCreate from "./productCreate";
 import productEdit from "./productEdit";
 
-import users from "./users";
 import auth from "./auth";
+import users from "./users";
+
+import login from "./login";
+import register from "./register";
+
 import carts from "./carts";
 
 import member from "./member";
@@ -37,6 +41,10 @@ const reducers = combineReducers({
 
     users,
     auth,
+
+    login,
+    register,
+
     carts,
 
     members,

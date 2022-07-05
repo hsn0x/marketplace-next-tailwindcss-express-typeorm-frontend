@@ -2,22 +2,21 @@ import React, { useState } from "react";
 import { Card, Label, TextInput, Checkbox, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { authActions } from "../../redux/actions";
-import { fetchProfile, signIn } from "../../redux/reducers/auth";
+import { authActions, loginActions } from "../../redux/actions";
+import { fetchProfile } from "../../redux/reducers/auth";
 import { useRouter } from "next/router";
 import { axiosServer } from "../../db/axios";
 import Cookies from "js-cookie";
+import { signIn } from "../../redux/reducers/login";
 
 const LoginScreen = () => {
     const router = useRouter();
     const auth = useSelector(({ auth }) => auth);
-    const email = auth.email;
-    const password = auth.password;
 
     const dispatch = useDispatch();
 
-    const { updateEmail, updatePassword } = bindActionCreators(
-        authActions,
+    const { updateLoginEmail, updateLoginPassword } = bindActionCreators(
+        loginActions,
         dispatch
     );
 
@@ -51,7 +50,7 @@ const LoginScreen = () => {
                             </div>
                             <TextInput
                                 onChange={(event) =>
-                                    updateEmail(event.target.value)
+                                    updateLoginEmail(event.target.value)
                                 }
                                 id="email"
                                 type="text"
@@ -68,7 +67,7 @@ const LoginScreen = () => {
                             </div>
                             <TextInput
                                 onChange={(event) =>
-                                    updatePassword(event.target.value)
+                                    updateLoginPassword(event.target.value)
                                 }
                                 id="password1"
                                 type="password"

@@ -21,11 +21,11 @@ const StoreEditPageContent = () => {
                 <form className="flex flex-row gap-1">
                     <div className="flex flex-col gap-1 w-full">
                         <StoreEditPageContentInformations />
-                        <StoreEditPageContentSubmit />
                     </div>
                     <div className="flex flex-col gap-1 w-full ">
                         <StoreEditPageContentCategory />
                         <StoreEditPageContentMedia />
+                        <StoreEditPageContentSubmit />
                     </div>
                 </form>
             </div>

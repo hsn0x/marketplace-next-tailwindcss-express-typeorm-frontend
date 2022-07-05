@@ -1,7 +1,60 @@
 import React from "react";
 import { Card, Label, TextInput, Checkbox, Button } from "flowbite-react";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+    authActions,
+    loginActions,
+    registerActions,
+} from "../../redux/actions";
+import { updateRegisterPasswordConfirmed } from "../../redux/actions/register";
+import { signUp } from "../../redux/reducers/register";
+import { fetchProfile } from "../../redux/reducers/auth";
+import { signIn } from "../../redux/reducers/login";
 
 const RegisterScreen = () => {
+    const router = useRouter();
+    const auth = useSelector(({ auth }) => auth);
+    const register = useSelector(({ register }) => register);
+
+    const dispatch = useDispatch();
+
+    const { updateLoginEmail, updateLoginPassword } = bindActionCreators(
+        loginActions,
+        dispatch
+    );
+
+    const {
+        updateRegisterFirstName,
+        updateRegisterLastName,
+        updateRegisterUsername,
+        updateRegisterEmail,
+        updateRegisterPassword,
+        updateRegisterPasswordConfirmed,
+    } = bindActionCreators(registerActions, dispatch);
+
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        await dispatch(signUp());
+        console.log({ register });
+        updateLoginEmail(register.email);
+        updateLoginPassword(register.password);
+        handleSignIn(event);
+    };
+
+    const handleSignIn = async (event) => {
+        event.preventDefault();
+        const signInData = await dispatch(signIn());
+        console.log(signInData);
+        if (signInData.isAuthenticated) {
+            console.log(auth.isAuthenticated);
+            const authUser = await dispatch(fetchProfile());
+            authUser;
+            router.push("/");
+        } else {
+        }
+    };
     return (
         <Card>
             <div>
@@ -9,7 +62,10 @@ const RegisterScreen = () => {
                     Register Screen
                 </h5>
                 <div>
-                    <form className="flex flex-col gap-4">
+                    <form
+                        onSubmit={(event) => handleSignUp(event)}
+                        className="flex flex-col gap-4"
+                    >
                         <div className="flex justify-between">
                             <div className="w-full mr-2">
                                 <div className="mb-2">
@@ -19,6 +75,11 @@ const RegisterScreen = () => {
                                     />
                                 </div>
                                 <TextInput
+                                    onChange={(event) =>
+                                        updateRegisterFirstName(
+                                            event.target.value
+                                        )
+                                    }
                                     id="firstName"
                                     type="text"
                                     placeholder="First name"
@@ -34,6 +95,11 @@ const RegisterScreen = () => {
                                     />
                                 </div>
                                 <TextInput
+                                    onChange={(event) =>
+                                        updateRegisterLastName(
+                                            event.target.value
+                                        )
+                                    }
                                     id="lastName"
                                     type="text"
                                     placeholder="Last name"
@@ -44,9 +110,26 @@ const RegisterScreen = () => {
                         </div>
                         <div>
                             <div className="mb-2 block">
+                                <Label htmlFor="username" value="Username" />
+                            </div>
+                            <TextInput
+                                onChange={(event) =>
+                                    updateRegisterUsername(event.target.value)
+                                }
+                                id="username"
+                                type="text"
+                                placeholder="Username"
+                                required={true}
+                            />
+                        </div>
+                        <div>
+                            <div className="mb-2 block">
                                 <Label htmlFor="email" value="Email" />
                             </div>
                             <TextInput
+                                onChange={(event) =>
+                                    updateRegisterEmail(event.target.value)
+                                }
                                 id="email"
                                 type="email"
                                 placeholder="Email"
@@ -58,6 +141,9 @@ const RegisterScreen = () => {
                                 <Label htmlFor="password" value="Password" />
                             </div>
                             <TextInput
+                                onChange={(event) =>
+                                    updateRegisterPassword(event.target.value)
+                                }
                                 id="password"
                                 type="password"
                                 placeholder="Password"
@@ -72,6 +158,11 @@ const RegisterScreen = () => {
                                 />
                             </div>
                             <TextInput
+                                onChange={(event) =>
+                                    updateRegisterPasswordConfirmed(
+                                        event.target.value
+                                    )
+                                }
                                 id="confirmPassword"
                                 type="password"
                                 placeholder="Confirm password"

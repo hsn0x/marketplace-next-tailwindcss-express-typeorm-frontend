@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
+import { imagesConfig } from "../../config/images";
 
 const ProductPageImages = ({ images }) => {
     const [productImageSelected, selectProductImage] = useState(0);
@@ -10,7 +11,10 @@ const ProductPageImages = ({ images }) => {
                 <Image
                     layout="responsive"
                     objectFit="cover"
-                    src={images[productImageSelected].url}
+                    src={
+                        images[productImageSelected].url ||
+                        imagesConfig.defaultCovers
+                    }
                     alt={images[productImageSelected].public_id}
                     width={600}
                     height={400}
@@ -26,7 +30,7 @@ const ProductPageImages = ({ images }) => {
                         <Image
                             layout="responsive"
                             objectFit="cover"
-                            src={image.url}
+                            src={image.url || imagesConfig.defaultCovers}
                             alt={image.public_id}
                             width={100}
                             height={100}

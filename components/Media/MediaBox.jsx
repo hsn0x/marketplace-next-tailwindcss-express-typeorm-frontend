@@ -1,6 +1,7 @@
 import { Button, Card } from "flowbite-react";
 import Image from "next/image";
 import React from "react";
+import { imagesConfig } from "../../config/images";
 
 const MediaBox = ({ title, media }) => {
     return (
@@ -14,7 +15,7 @@ const MediaBox = ({ title, media }) => {
                     className="h-full w-full border-1 p-1 rounded-2xl border-gray-300 "
                     layout="responsive"
                     objectFit="cover"
-                    src={media.url}
+                    src={media.url || imagesConfig.defaultCovers}
                     alt=""
                     width={208}
                     height={208}
