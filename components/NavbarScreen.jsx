@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
@@ -17,50 +17,48 @@ import {
     FaHome,
 } from "react-icons/fa";
 import { fetchProfile, signOut } from "../redux/reducers/auth";
+import { navbarNavigations } from "../constants/navbar";
+import { handelNavbarNavigations } from "../lib/handelNavbarNavigations";
+import { bindActionCreators } from "redux";
 import {
-    navbarNavigations,
-    navbarNavigationsAuthSlug,
-    navbarNavigationsGuestSlug,
-} from "../constants/navbar";
+    categoriesMarketActions,
+    categoriesProductActions,
+} from "../redux/actions";
+import { getError } from "../utils/error";
+import { axiosServer } from "../db/axios";
+import { handleCategoriesTree } from "../lib/handleCategoriesTree";
+import Image from "next/image";
 
 const NavbarScreen = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const auth = useSelector(({ auth }) => auth);
+    const { categoriesProduct } = useSelector(
+        ({ categoriesProduct }) => categoriesProduct
+    );
+    const { categoriesMarket } = useSelector(
+        ({ categoriesMarket }) => categoriesMarket
+    );
+    const isHandleCategoriesProductTree =
+        handleCategoriesTree(categoriesProduct);
+    const isHandleCategoriesMarketTree = handleCategoriesTree(categoriesMarket);
+    console.log({ isHandleCategoriesProductTree });
+    console.log({ isHandleCategoriesMarketTree });
+    const {
+        categoriesProductFetchFail,
+        categoriesProductFetchRequest,
+        categoriesProductFetchSuccess,
+    } = bindActionCreators(categoriesProductActions, dispatch);
+    const {
+        categoriesMarketFetchFail,
+        categoriesMarketFetchRequest,
+        categoriesMarketFetchSuccess,
+    } = bindActionCreators(categoriesMarketActions, dispatch);
 
-    const handelNavbarNavigations = (navss) =>
-        navss.map((nav) => {
-            if (nav.children.length > 0) {
-                return {
-                    ...nav,
-                    children: [...handelNavbarNavigations(nav.children)],
-                };
-            } else {
-                if (
-                    auth.user &&
-                    navbarNavigationsGuestSlug.includes(nav.slug)
-                ) {
-                    return {
-                        ...nav,
-                        show: false,
-                    };
-                } else if (
-                    !auth.user &&
-                    navbarNavigationsAuthSlug.includes(nav.slug)
-                ) {
-                    return {
-                        ...nav,
-                        show: false,
-                    };
-                } else {
-                    return {
-                        ...nav,
-                    };
-                }
-            }
-        });
-    const isHandelNavbarNavigations =
-        handelNavbarNavigations(navbarNavigations);
+    const isHandelNavbarNavigations = handelNavbarNavigations(
+        navbarNavigations,
+        auth
+    );
 
     const handelSignout = async (e) => {
         e.preventDefault();
@@ -76,20 +74,52 @@ const NavbarScreen = () => {
         if (auth.user && auth.isAuthenticated && !auth.profile) {
             dispatch(fetchProfile());
         }
+        const fetchCategoriesProduct = async () => {
+            categoriesProductFetchRequest();
+            try {
+                const { data } = await axiosServer.get(
+                    "/categories/type/product"
+                );
+                categoriesProductFetchSuccess(data.categories);
+            } catch (error) {
+                categoriesProductFetchFail(getError(error));
+            }
+        };
+        const fetchCategoriesMarket = async () => {
+            categoriesMarketFetchRequest();
+            try {
+                const { data } = await axiosServer.get(
+                    "/categories/type/market"
+                );
+                categoriesMarketFetchSuccess(data.categories);
+            } catch (error) {
+                categoriesMarketFetchFail(getError(error));
+            }
+        };
+        fetchCategoriesMarket();
+        fetchCategoriesProduct();
     }, [auth.user, dispatch, auth.isAuthenticated, auth.profile]);
 
     return (
         <Navbar fluid={true} rounded={true}>
-            <Navbar.Brand href="https://flowbite.com/">
-                <img
-                    src="https://flowbite.com/docs/images/logo.svg"
-                    className="mr-3 h-6 sm:h-9"
-                    alt="Flowbite Logo"
-                />
-                <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    Marketplace
-                </span>
-            </Navbar.Brand>
+            <div>
+                <Navbar.Brand href="#">
+                    <div className="flex gap-1">
+                        <div>
+                            <Image
+                                src="/hsn_logo.png"
+                                objectFit="cover"
+                                alt="HSN Marketplace Logo"
+                                height={"80"}
+                                width={"80"}
+                            />
+                        </div>
+                        <div className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                            Marketplace
+                        </div>
+                    </div>
+                </Navbar.Brand>
+            </div>
             <div className="flex md:order-2 z-10">
                 <Dropdown
                     arrowIcon={false}
@@ -147,14 +177,193 @@ const NavbarScreen = () => {
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-                {isHandelNavbarNavigations.map(
-                    ({ label, href, place, id }) =>
-                        place == "top" && (
-                            <Link key={id} href={href}>
-                                {label}
-                            </Link>
-                        )
-                )}
+                <div className="flex gap-1">
+                    <div className="flex gap-1">
+                        {" "}
+                        {isHandelNavbarNavigations.map(
+                            ({ label, href, place, id }) =>
+                                place == "top" && (
+                                    <Button color={"gray"}>
+                                        <Link key={id} href={href}>
+                                            {label}
+                                        </Link>
+                                    </Button>
+                                )
+                        )}
+                    </div>
+                    <div>
+                        <Dropdown label="Stores" color={"gray"}>
+                            <div className="grid grid-cols-5 gap-1">
+                                {isHandleCategoriesMarketTree.map(
+                                    (category, index) => (
+                                        <div
+                                            className="bg-gray-50"
+                                            key={category.id}
+                                        >
+                                            {/* <div>
+                                        <Dropdown.Header>
+                                            <span className="block text-sm">
+                                                {category.name}
+                                            </span>
+                                        </Dropdown.Header>
+                                    </div> */}
+                                            <div>
+                                                <Dropdown.Item>
+                                                    <div>
+                                                        <div className="mb-2">
+                                                            <Link
+                                                                href={`/categories/${category.slug}`}
+                                                            >
+                                                                <h2 className="hover:underline text-lg font-bold">
+                                                                    {category.name.toUpperCase()}
+                                                                </h2>
+                                                            </Link>
+                                                        </div>
+                                                        <div className="ml-2">
+                                                            {category.sub &&
+                                                                category.sub.map(
+                                                                    (
+                                                                        subCategory,
+                                                                        subCategoryIndex
+                                                                    ) => (
+                                                                        <div
+                                                                            key={
+                                                                                subCategory.id
+                                                                            }
+                                                                            className="mb-2"
+                                                                        >
+                                                                            <div className="">
+                                                                                <Link
+                                                                                    href={`/categories/${category.slug}`}
+                                                                                >
+                                                                                    <h3 className="hover:underline text-base font-bold">
+                                                                                        {subCategory.name.toUpperCase()}
+                                                                                    </h3>
+                                                                                </Link>
+                                                                            </div>
+                                                                            <div className="ml-2">
+                                                                                {subCategory.sub &&
+                                                                                    subCategory.sub.map(
+                                                                                        (
+                                                                                            subSubCategory,
+                                                                                            subSubCategoryIndex
+                                                                                        ) => (
+                                                                                            <div
+                                                                                                key={
+                                                                                                    subSubCategory.id
+                                                                                                }
+                                                                                            >
+                                                                                                <Link
+                                                                                                    href={`/categories/${category.slug}`}
+                                                                                                >
+                                                                                                    <h2 className="hover:underline">
+                                                                                                        {subSubCategory.name.toUpperCase()}
+                                                                                                    </h2>
+                                                                                                </Link>
+                                                                                            </div>
+                                                                                        )
+                                                                                    )}
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                )}
+                                                        </div>
+                                                    </div>
+                                                </Dropdown.Item>
+                                            </div>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </Dropdown>
+                    </div>
+                    <div>
+                        <Dropdown label="Products" color={"gray"}>
+                            <div className="grid grid-cols-5 gap-1">
+                                {isHandleCategoriesProductTree.map(
+                                    (category, index) => (
+                                        <div
+                                            className="bg-gray-50"
+                                            key={category.id}
+                                        >
+                                            {/* <div>
+                                        <Dropdown.Header>
+                                            <span className="block text-sm">
+                                                {category.name}
+                                            </span>
+                                        </Dropdown.Header>
+                                    </div> */}
+                                            <div>
+                                                <Dropdown.Item>
+                                                    <div>
+                                                        <div className="mb-2">
+                                                            <Link
+                                                                href={`/categories/${category.slug}`}
+                                                            >
+                                                                <h2 className="hover:underline text-lg font-bold">
+                                                                    {category.name.toUpperCase()}
+                                                                </h2>
+                                                            </Link>
+                                                        </div>
+                                                        <div className="ml-2">
+                                                            {category.sub &&
+                                                                category.sub.map(
+                                                                    (
+                                                                        subCategory,
+                                                                        subCategoryIndex
+                                                                    ) => (
+                                                                        <div
+                                                                            key={
+                                                                                subCategory.id
+                                                                            }
+                                                                            className="mb-2"
+                                                                        >
+                                                                            <div className="">
+                                                                                <Link
+                                                                                    href={`/categories/${category.slug}`}
+                                                                                >
+                                                                                    <h3 className="hover:underline text-base font-bold">
+                                                                                        {subCategory.name.toUpperCase()}
+                                                                                    </h3>
+                                                                                </Link>
+                                                                            </div>
+                                                                            <div className="ml-2">
+                                                                                {subCategory.sub &&
+                                                                                    subCategory.sub.map(
+                                                                                        (
+                                                                                            subSubCategory,
+                                                                                            subSubCategoryIndex
+                                                                                        ) => (
+                                                                                            <div
+                                                                                                key={
+                                                                                                    subSubCategory.id
+                                                                                                }
+                                                                                            >
+                                                                                                <Link
+                                                                                                    href={`/categories/${category.slug}`}
+                                                                                                >
+                                                                                                    <h2 className="hover:underline">
+                                                                                                        {subSubCategory.name.toUpperCase()}
+                                                                                                    </h2>
+                                                                                                </Link>
+                                                                                            </div>
+                                                                                        )
+                                                                                    )}
+                                                                            </div>
+                                                                        </div>
+                                                                    )
+                                                                )}
+                                                        </div>
+                                                    </div>
+                                                </Dropdown.Item>
+                                            </div>
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        </Dropdown>
+                    </div>
+                </div>
             </Navbar.Collapse>
         </Navbar>
     );

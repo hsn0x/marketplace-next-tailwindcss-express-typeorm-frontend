@@ -26,7 +26,10 @@ import member from "./member";
 import members from "./members";
 
 import category from "./category";
+
 import categories from "./categories";
+import categoriesProduct from "./categoriesProduct";
+import categoriesMarket from "./categoriesMarket";
 
 const reducers = combineReducers({
     markets,
@@ -55,6 +58,9 @@ const reducers = combineReducers({
     member,
 
     categories,
+    categoriesProduct,
+    categoriesMarket,
+
     category,
 });
 

@@ -22,4 +22,7 @@ export * as memberActions from "./member";
 export * as membersActions from "./members";
 
 export * as categoryActions from "./category";
+
 export * as categoriesActions from "./categories";
+export * as categoriesProductActions from "./categoriesProduct";
+export * as categoriesMarketActions from "./categoriesMarket";
