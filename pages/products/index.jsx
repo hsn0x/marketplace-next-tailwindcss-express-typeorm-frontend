@@ -8,11 +8,12 @@ import { getError } from "../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
 import Link from "next/link";
 import ProductBox from "../../components/Product/ProductBox";
-import ProductPageTitle from "../../components/Products/ProductsPageTitle";
+import ProductsPageTitle from "../../components/Products/ProductsPageTitle";
 import ProductPageLoading from "../../components/Products/ProductsPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import ProductsBox from "../../components/Products/ProductsBox";
+import ProductsPageFilters from "./ProductsPageFilters";
 
 const Products = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -42,14 +43,23 @@ const Products = ({ authUser }) => {
     }, []);
 
     return (
-        <div>
-            <ProductPageLoading loading={loading} />
-            <ProductPageTitle title="All Products" />
-            {searchProducts && searchProducts.length > 0 ? (
-                <ProductsBox products={searchProducts} />
-            ) : (
-                <ProductsBox products={products} />
-            )}
+        <div className="flex flex-col gap-1">
+            <div>
+                <ProductPageLoading loading={loading} />
+            </div>
+            <div>
+                <ProductsPageTitle title="All Products" />
+            </div>
+            <div>
+                <ProductsPageFilters title="All Products" />
+            </div>
+            <div>
+                {searchProducts && searchProducts.length > 0 ? (
+                    <ProductsBox products={searchProducts} />
+                ) : (
+                    <ProductsBox products={products} />
+                )}
+            </div>
         </div>
     );
 };

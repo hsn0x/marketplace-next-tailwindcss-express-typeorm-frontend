@@ -4,7 +4,7 @@ import ProductsPageTitleSearch from "./ProductsPageTitleSearch";
 
 const ProductPageTitle = ({ title }) => {
     return (
-        <div className="mb-2">
+        <div>
             <Card className="">
                 <div className="flex justify-between">
                     <h2 className="text-4xl">{title}</h2>

@@ -3,7 +3,7 @@ import React from "react";
 
 const ProductPageLoading = ({ loading }) => {
     return (
-        <>
+        <div>
             {loading && (
                 <div className="flex justify-center items-center">
                     <Spinner
@@ -12,7 +12,7 @@ const ProductPageLoading = ({ loading }) => {
                     />
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

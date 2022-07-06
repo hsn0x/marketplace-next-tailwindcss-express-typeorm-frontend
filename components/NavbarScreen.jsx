@@ -42,8 +42,7 @@ const NavbarScreen = () => {
     const isHandleCategoriesProductTree =
         handleCategoriesTree(categoriesProduct);
     const isHandleCategoriesMarketTree = handleCategoriesTree(categoriesMarket);
-    console.log({ isHandleCategoriesProductTree });
-    console.log({ isHandleCategoriesMarketTree });
+
     const {
         categoriesProductFetchFail,
         categoriesProductFetchRequest,
