@@ -6,14 +6,14 @@ import ProductBoxButtonsLike from "./ProductBoxButtonsLike";
 import ProductBoxButtonsFavorite from "./ProductBoxButtonsFavorite";
 import ProductBoxButtonsAddToCart from "./ProductBoxButtonsAddToCart";
 
-const ProductBoxButtons = () => {
+const ProductBoxButtons = ({ product }) => {
     return (
         <div className="flex gap-1">
             <div>
                 <ProductBoxButtonsVoteUp />
             </div>
             <div>
-                <ProductBoxButtonsLike />
+                <ProductBoxButtonsLike product={product} />
             </div>
             <div>
                 <ProductBoxButtonsFavorite />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "flowbite-react";
-import { FaArrowUp, FaHeart, FaThumbsUp, FaCartPlus } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
 
 const ProductBoxButtonsAddToCart = () => {
     return (

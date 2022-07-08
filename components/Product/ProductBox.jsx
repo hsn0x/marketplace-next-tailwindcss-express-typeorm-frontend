@@ -33,7 +33,10 @@ const ProductBox = ({ product, authUser }) => {
                     )}
                     <ProductBoxDescription description={product.description} />
                     <ProductBoxPrice price={product.price} />
-                    <ProductBoxButtons price={product.price} />
+                    <ProductBoxButtons
+                        price={product.price}
+                        product={product}
+                    />
                     <ProductBoxAction product={product} user={user} />
                 </div>
             </Card>
