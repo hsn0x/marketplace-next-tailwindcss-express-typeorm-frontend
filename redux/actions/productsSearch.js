@@ -6,7 +6,6 @@ const productsSearchUpdateQuery = (payload) => {
         });
     };
 };
-
 const productsSearchFetchRequest = () => {
     return (dispatch) => {
         dispatch({

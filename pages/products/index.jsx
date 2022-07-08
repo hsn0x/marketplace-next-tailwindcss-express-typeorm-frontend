@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import { axiosServer } from "../../db/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { productsActions } from "../../redux/actions";
+import { categoriesProductActions, productsActions } from "../../redux/actions";
 import { bindActionCreators } from "redux";
 import { getError } from "../../utils/error";
 import { Card, Carousel, Spinner } from "flowbite-react";
@@ -13,7 +13,7 @@ import ProductPageLoading from "../../components/Products/ProductsPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import ProductsBox from "../../components/Products/ProductsBox";
-import ProductsPageFilters from "./ProductsPageFilters";
+import ProductsPageFilters from "../../components/Products/ProductsPageFilters";
 
 const Products = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -23,9 +23,17 @@ const Products = ({ authUser }) => {
         query,
         loading: searchLoading,
     } = useSelector(({ productsSearch }) => productsSearch);
+    const { products: filtersProducts, loading: filtersLoading } = useSelector(
+        ({ productsFilters }) => productsFilters
+    );
 
     const { productsFetchFail, productsFetchRequest, productsFetchSuccess } =
         bindActionCreators(productsActions, dispatch);
+    const {
+        categoriesProductFetchFail,
+        categoriesProductFetchRequest,
+        categoriesProductFetchSuccess,
+    } = bindActionCreators(categoriesProductActions, dispatch);
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
@@ -40,6 +48,19 @@ const Products = ({ authUser }) => {
             }
         };
         fetchProducts();
+
+        const fetchCategoriesProduct = async () => {
+            categoriesProductFetchRequest();
+            try {
+                const { data } = await axiosServer.get(
+                    "/categories/type/product"
+                );
+                categoriesProductFetchSuccess(data.categories);
+            } catch (error) {
+                categoriesProductFetchFail(getError(error));
+            }
+        };
+        fetchCategoriesProduct();
     }, []);
 
     return (
@@ -56,6 +77,8 @@ const Products = ({ authUser }) => {
             <div>
                 {searchProducts && searchProducts.length > 0 ? (
                     <ProductsBox products={searchProducts} />
+                ) : filtersProducts && filtersProducts.length > 0 ? (
+                    <ProductsBox products={filtersProducts} />
                 ) : (
                     <ProductsBox products={products} />
                 )}

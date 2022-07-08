@@ -22,7 +22,6 @@ const ProductCreatePageContentCategory = () => {
         categoriesFetchRequest,
         categoriesFetchSuccess,
     } = bindActionCreators(categoriesActions, dispatch);
-
     const { productCreateUpdateCategory } = bindActionCreators(
         productCreateActions,
         dispatch
@@ -63,7 +62,6 @@ const ProductCreatePageContentCategory = () => {
             parseInt(value),
         ]);
     };
-
     const handleCategoriesRoot = (categories) => {
         return categories.filter((category) => category.parentId === 0);
     };
@@ -84,7 +82,6 @@ const ProductCreatePageContentCategory = () => {
     const categoriesRootSub = handleCategoriesRootSub(categorySelected);
     const categoriesRootSubSub =
         handleCategoriesRootSubSub(categorySubSelected);
-    // const categoriesRootSubSub = handleCategoriesRootSub(categoriesRootSub);
 
     const CategoriesSelect = ({
         categoriesRoot,

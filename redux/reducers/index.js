@@ -8,6 +8,7 @@ import marketCreate from "./marketCreate";
 import marketEdit from "./marketEdit";
 
 import products from "./products";
+import productsFilters from "./productsFilters";
 import productsSearch from "./productsSearch";
 
 import product from "./product";
@@ -40,6 +41,7 @@ const reducers = combineReducers({
     marketEdit,
 
     products,
+    productsFilters,
     productsSearch,
 
     product,
