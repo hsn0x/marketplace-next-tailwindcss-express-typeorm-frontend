@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { requireAuthentication } from "../../HOC/requireAuthentication";
 import StoreBoxIntro from "../Store/StoreBoxIntro";
 import ProductBoxAction from "./ProductBoxAction";
+import ProductBoxButtons from "./ProductBoxButtons";
 import ProductBoxDescription from "./ProductBoxDescription";
 import ProductBoxImages from "./ProductBoxImages";
 import ProductBoxIntro from "./ProductBoxIntro";
@@ -32,6 +33,7 @@ const ProductBox = ({ product, authUser }) => {
                     )}
                     <ProductBoxDescription description={product.description} />
                     <ProductBoxPrice price={product.price} />
+                    <ProductBoxButtons price={product.price} />
                     <ProductBoxAction product={product} user={user} />
                 </div>
             </Card>
