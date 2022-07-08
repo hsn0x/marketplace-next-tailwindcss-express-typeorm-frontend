@@ -54,11 +54,11 @@ const ProductBoxButtonsLike = ({ product }) => {
             >
                 <div>
                     <FaThumbsUp />
-                    {like ? product.likes.length + 1 : product.likes.length}
-                    {" - - "}
-                    {product.id}
                 </div>
             </Button>
+            <div className="text-center text-xl font-bold">
+                {like ? product.likes.length + 1 : product.likes.length}
+            </div>
         </div>
     );
 };

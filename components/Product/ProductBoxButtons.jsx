@@ -10,13 +10,13 @@ const ProductBoxButtons = ({ product }) => {
     return (
         <div className="flex gap-1">
             <div>
-                <ProductBoxButtonsVoteUp />
+                <ProductBoxButtonsVoteUp product={product} />
             </div>
             <div>
                 <ProductBoxButtonsLike product={product} />
             </div>
             <div>
-                <ProductBoxButtonsFavorite />
+                <ProductBoxButtonsFavorite product={product} />
             </div>
             <div>
                 <ProductBoxButtonsAddToCart />
