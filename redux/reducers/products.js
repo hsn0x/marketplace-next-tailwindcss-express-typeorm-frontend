@@ -10,9 +10,12 @@ const PRODUCTS_DELETE_FAIL = "PRODUCTS_DELETE_FAIL";
 const PRODUCTS_DELETE_RESET = "PRODUCTS_DELETE_RESET";
 
 const initialState = {
-    products: [],
     loading: false,
     error: "",
+    rows: [],
+    totalItems: 0,
+    totalPages: 0,
+    currentPage: 1,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +26,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                products: action.payload,
+                ...action.payload,
                 error: "",
             };
         case PRODUCTS_FETCH_FAIL:

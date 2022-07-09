@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { categoriesProductActions, productsActions } from "../../redux/actions";
 import { bindActionCreators } from "redux";
 import { getError } from "../../utils/error";
-import { Card, Carousel, Spinner } from "flowbite-react";
+import { Card, Carousel, Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import ProductBox from "../../components/Product/ProductBox";
 import ProductsPageTitle from "../../components/Products/ProductsPageTitle";
@@ -14,10 +14,17 @@ import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import ProductsBox from "../../components/Products/ProductsBox";
 import ProductsPageFilters from "../../components/Products/ProductsPageFilters";
+import ProductsPagination from "../../components/Products/ProductsPagination";
 
 const Products = ({ authUser }) => {
     const dispatch = useDispatch();
-    const { products, loading } = useSelector(({ products }) => products);
+    const {
+        rows: products,
+        loading,
+        totalItems,
+        totalPages,
+        currentPage,
+    } = useSelector(({ products }) => products);
     const {
         products: searchProducts,
         query,
@@ -41,8 +48,13 @@ const Products = ({ authUser }) => {
         const fetchProducts = async () => {
             productsFetchRequest();
             try {
-                const { data } = await axiosServer.get("/products");
-                productsFetchSuccess(data.products);
+                const { data } = await axiosServer.get("/products", {
+                    params: {
+                        page: currentPage,
+                        size: 5,
+                    },
+                });
+                productsFetchSuccess(data);
             } catch (error) {
                 productsFetchFail(getError(error));
             }
@@ -75,6 +87,13 @@ const Products = ({ authUser }) => {
                 <ProductsPageFilters title="All Products" />
             </div>
             <div>
+                <ProductsPagination
+                    totalItems={totalItems}
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                />
+            </div>
+            <div>
                 {searchProducts && searchProducts.length > 0 ? (
                     <ProductsBox products={searchProducts} />
                 ) : filtersProducts && filtersProducts.length > 0 ? (
@@ -82,6 +101,13 @@ const Products = ({ authUser }) => {
                 ) : (
                     <ProductsBox products={products} />
                 )}
+            </div>
+            <div>
+                <ProductsPagination
+                    totalItems={totalItems}
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                />
             </div>
         </div>
     );

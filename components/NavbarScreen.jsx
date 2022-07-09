@@ -73,7 +73,6 @@ const NavbarScreen = () => {
         const myProfile = async () => {
             if (auth.user && auth.isAuthenticated && !auth.profile) {
                 const fetchedProfile = await dispatch(fetchProfile());
-                console.log({ fetchedProfile });
                 if (!fetchedProfile?.isAuthenticated) {
                     dispatch(signOut());
                 }
