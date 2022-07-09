@@ -10,7 +10,7 @@ const ProductPageTabsComments = ({ comments }) => {
                     return (
                         <div key={index}>
                             <Card>
-                                <div className="text-xl font-bold">
+                                <div className="text-xl font-bold underline">
                                     {comment.title}
                                 </div>
                                 <div>{comment.content}</div>

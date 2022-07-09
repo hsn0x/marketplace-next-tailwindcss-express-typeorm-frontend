@@ -88,18 +88,36 @@ const reducer = (state = initialState, action) => {
 export const fetchProfile = (profile) => {
     return async (dispatch) => {
         try {
-            const { data } = await axiosServer.get("/auth/me");
+            const { data: fetchedProfile } = await axiosServer.get("/auth/me");
             dispatch({
                 type: "UPDATE_AUTH",
-                payload: data.user,
+                payload: fetchedProfile.user,
             });
             dispatch({
                 type: "UPDATE_PROFILE",
-                payload: data.user,
+                payload: fetchedProfile.user,
             });
-            return data;
+            Notify.success(fetchedProfile?.message || "Login Successful", {
+                position: "right-top",
+                width: "280px",
+                distance: "10px",
+                opacity: 1,
+                timeout: 1000,
+                pauseOnHover: true,
+                keepOnHover: true,
+            });
+            return fetchedProfile;
         } catch (error) {
-            return null;
+            Notify.failure(
+                error.response?.data?.message || "You need to logged In",
+                {
+                    position: "right-top",
+                    timeout: 1000,
+                    pauseOnHover: true,
+                    keepOnHover: true,
+                }
+            );
+            return error.response?.data;
         }
     };
 };

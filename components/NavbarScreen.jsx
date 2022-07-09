@@ -70,9 +70,17 @@ const NavbarScreen = () => {
     };
 
     useEffect(() => {
-        if (auth.user && auth.isAuthenticated && !auth.profile) {
-            dispatch(fetchProfile());
-        }
+        const myProfile = async () => {
+            if (auth.user && auth.isAuthenticated && !auth.profile) {
+                const fetchedProfile = await dispatch(fetchProfile());
+                console.log({ fetchedProfile });
+                if (!fetchedProfile?.isAuthenticated) {
+                    dispatch(signOut());
+                }
+            }
+        };
+        myProfile();
+
         const fetchCategoriesProduct = async () => {
             categoriesProductFetchRequest();
             try {
@@ -182,11 +190,13 @@ const NavbarScreen = () => {
                         {isHandelNavbarNavigations.map(
                             ({ label, href, place, id }) =>
                                 place == "top" && (
-                                    <Button color={"gray"}>
-                                        <Link key={id} href={href}>
-                                            {label}
-                                        </Link>
-                                    </Button>
+                                    <div key={id}>
+                                        <Button color={"gray"}>
+                                            <Link key={id} href={href}>
+                                                {label}
+                                            </Link>
+                                        </Button>
+                                    </div>
                                 )
                         )}
                     </div>
