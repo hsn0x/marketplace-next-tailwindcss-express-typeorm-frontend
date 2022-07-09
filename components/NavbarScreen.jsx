@@ -185,7 +185,6 @@ const NavbarScreen = () => {
             <Navbar.Collapse>
                 <div className="flex gap-1">
                     <div className="flex gap-1">
-                        {" "}
                         {isHandelNavbarNavigations.map(
                             ({ label, href, place, id }) =>
                                 place == "top" && (

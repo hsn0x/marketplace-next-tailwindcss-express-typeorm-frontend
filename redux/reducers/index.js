@@ -32,6 +32,8 @@ import categories from "./categories";
 import categoriesProduct from "./categoriesProduct";
 import categoriesMarket from "./categoriesMarket";
 
+import comments from "./comments";
+
 const reducers = combineReducers({
     markets,
     marketsSearch,
@@ -64,6 +66,8 @@ const reducers = combineReducers({
     categoriesMarket,
 
     category,
+
+    comments,
 });
 
 export default reducers;

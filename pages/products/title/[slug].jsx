@@ -16,19 +16,23 @@ import ProductPageLoading from "../../../components/Product/ProductPageLoading";
 import ProductPageTabs from "../../../components/Product/ProductPageTabs";
 import { axiosServer } from "../../../db/axios";
 import { productActions } from "../../../redux/actions";
+import { updateAuth, updateIsAuthenticated } from "../../../redux/actions/auth";
 import { getError } from "../../../utils/error";
 
-const ProductPage = ({ params }) => {
+const ProductPage = ({ authUser, params }) => {
     const { slug } = params;
 
     const dispatch = useDispatch();
     const { product, loading } = useSelector(({ product }) => product);
-    console.log({ product });
 
     const { productFetchFail, productFetchRequest, productFetchSuccess } =
         bindActionCreators(productActions, dispatch);
 
     useEffect(() => {
+        dispatch(updateAuth(authUser));
+        dispatch(updateIsAuthenticated(!!authUser));
+        console.log({ authUser });
+
         const fetchProduct = async () => {
             productFetchRequest();
             try {
@@ -42,7 +46,7 @@ const ProductPage = ({ params }) => {
             }
         };
         fetchProduct();
-    }, []);
+    }, [authUser, dispatch]);
 
     return (
         <div>

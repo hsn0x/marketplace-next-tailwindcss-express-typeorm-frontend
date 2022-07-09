@@ -8,7 +8,13 @@ const handler = nc();
 async function loginRoute(req, res) {
     const authUser = req.body.user;
     if (authUser) {
-        req.session.user = { ...authUser, Markets: [], Products: [] };
+        req.session.user = {
+            ...authUser,
+            Markets: [],
+            Products: [],
+            comments: [],
+            reviews: [],
+        };
         await req.session.save();
         return res.send({ ok: true, message: "Logged in" });
     } else {

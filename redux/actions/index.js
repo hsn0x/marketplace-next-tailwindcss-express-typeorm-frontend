@@ -27,3 +27,5 @@ export * as categoryActions from "./category";
 export * as categoriesActions from "./categories";
 export * as categoriesProductActions from "./categoriesProduct";
 export * as categoriesMarketActions from "./categoriesMarket";
+
+export * as commentsActions from "./comments";
