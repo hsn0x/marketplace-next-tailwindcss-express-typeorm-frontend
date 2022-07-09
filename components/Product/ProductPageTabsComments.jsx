@@ -1,5 +1,6 @@
 import { Card } from "flowbite-react";
 import React from "react";
+import ProductPageTabsBy from "./ProductPageTabsBy";
 
 const ProductPageTabsComments = ({ comments }) => {
     return (
@@ -13,6 +14,7 @@ const ProductPageTabsComments = ({ comments }) => {
                                     {comment.title}
                                 </div>
                                 <div>{comment.content}</div>
+                                <ProductPageTabsBy user={comment.User} />
                             </Card>
                         </div>
                     );

@@ -67,6 +67,7 @@ const ProductPage = ({ params }) => {
                         <Card>
                             <div>
                                 <ProductPageTabs
+                                    user={product.User}
                                     reviews={product.reviews}
                                     comments={product.comments}
                                     about={product.about}

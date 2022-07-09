@@ -4,15 +4,15 @@ import ProductPageTabsAbout from "./ProductPageTabsAbout";
 import ProductPageTabsComments from "./ProductPageTabsComments";
 import ProductPageTabsReviews from "./ProductPageTabsReviews";
 
-const ProductPageTabs = ({ reviews, comments, about }) => {
+const ProductPageTabs = ({ user, reviews, comments, about }) => {
     return (
         <div>
             <Tabs.Group aria-label="Pills" style="pills">
                 <Tabs.Item title="Comments">
-                    <ProductPageTabsComments comments={comments} />
+                    <ProductPageTabsComments user={user} comments={comments} />
                 </Tabs.Item>
                 <Tabs.Item title="Reviews">
-                    <ProductPageTabsReviews reviews={reviews} />
+                    <ProductPageTabsReviews user={user} reviews={reviews} />
                 </Tabs.Item>
                 <Tabs.Item title="About">
                     <ProductPageTabsAbout about={about} />

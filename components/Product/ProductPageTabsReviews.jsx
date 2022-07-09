@@ -1,5 +1,7 @@
 import { Card, Rating } from "flowbite-react";
+import Link from "next/link";
 import React from "react";
+import ProductPageTabsBy from "./ProductPageTabsBy";
 
 const ProductPageTabsReviews = ({ reviews }) => {
     return (
@@ -28,7 +30,7 @@ const ProductPageTabsReviews = ({ reviews }) => {
                                             })}
 
                                         <p className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                                            4.95 out of 5
+                                            {review.rate} out of 5
                                         </p>
                                     </Rating>
                                 </div>
@@ -36,6 +38,7 @@ const ProductPageTabsReviews = ({ reviews }) => {
                                     {review.title}
                                 </div>
                                 <div>{review.content}</div>
+                                <ProductPageTabsBy user={review.User} />
                             </Card>
                         </div>
                     );

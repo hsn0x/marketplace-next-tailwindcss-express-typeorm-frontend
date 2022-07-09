@@ -58,7 +58,7 @@ const ProductBoxButtonsLike = ({ product }) => {
                 </div>
             </Button>
             <div className="text-center text-xl font-bold">
-                {like ? product.likes.length + 1 : product.likes.length}
+                {like ? product.likes.length + 1 : product.likes?.length}
             </div>
         </div>
     );

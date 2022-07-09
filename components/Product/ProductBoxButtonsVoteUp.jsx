@@ -58,7 +58,7 @@ const ProductBoxButtonsVote = ({ product }) => {
                 </div>
             </Button>
             <div className="text-center text-xl font-bold">
-                {vote ? product.votes.length + 1 : product.votes.length}
+                {vote ? product.votes.length + 1 : product.votes?.length}
             </div>
         </div>
     );
