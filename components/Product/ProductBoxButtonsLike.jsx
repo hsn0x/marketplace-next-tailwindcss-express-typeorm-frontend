@@ -44,6 +44,7 @@ const ProductBoxButtonsLike = ({ product }) => {
     return (
         <div>
             <Button
+                color={"gray"}
                 pill={true}
                 outline={like ? false : true}
                 onClick={() =>

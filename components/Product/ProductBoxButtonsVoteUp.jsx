@@ -44,6 +44,7 @@ const ProductBoxButtonsVote = ({ product }) => {
     return (
         <div>
             <Button
+                color={"gray"}
                 pill={true}
                 outline={vote ? false : true}
                 onClick={() =>

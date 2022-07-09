@@ -5,7 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 const ProductBoxButtonsAddToCart = () => {
     return (
         <div>
-            <Button pill={true} outline={true}>
+            <Button color={"gray"} pill={true} outline={true}>
                 <div>
                     <FaCartPlus />
                 </div>

@@ -48,6 +48,7 @@ const ProductBoxButtonsFavorite = ({ product }) => {
     return (
         <div>
             <Button
+                color={"gray"}
                 pill={true}
                 outline={favorite ? false : true}
                 onClick={() =>

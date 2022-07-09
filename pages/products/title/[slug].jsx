@@ -13,6 +13,7 @@ import { bindActionCreators } from "redux";
 import ProductPageDetails from "../../../components/Product/ProductPageDetails";
 import ProductPageImages from "../../../components/Product/ProductPageImages";
 import ProductPageLoading from "../../../components/Product/ProductPageLoading";
+import ProductPageTabs from "../../../components/Product/ProductPageTabs";
 import { axiosServer } from "../../../db/axios";
 import { productActions } from "../../../redux/actions";
 import { getError } from "../../../utils/error";
@@ -45,22 +46,35 @@ const ProductPage = ({ params }) => {
 
     return (
         <div>
-            <Card>
-                <ProductPageLoading loading={loading} />
-                {product && (
+            <ProductPageLoading loading={loading} />
+            {product && (
+                <div className="flex flex-col gap-1">
                     <div>
-                        <div className="grid grid-cols-2 gap-2">
-                            <ProductPageImages images={product.images} />
-                            <ProductPageDetails
-                                title={product.title}
-                                price={product.price}
-                                store={product.Market}
-                                description={product.description}
-                            />
-                        </div>
+                        <Card>
+                            <div className="grid grid-cols-2 gap-2">
+                                <ProductPageImages images={product.images} />
+                                <ProductPageDetails
+                                    title={product.title}
+                                    price={product.price}
+                                    store={product.Market}
+                                    description={product.description}
+                                />
+                            </div>
+                        </Card>
                     </div>
-                )}
-            </Card>
+
+                    <div>
+                        <Card>
+                            <div>
+                                <ProductPageTabs
+                                    reviews={product.reviews}
+                                    comments={product.comments}
+                                />
+                            </div>
+                        </Card>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
