@@ -69,6 +69,7 @@ const ProductPage = ({ params }) => {
                                 <ProductPageTabs
                                     reviews={product.reviews}
                                     comments={product.comments}
+                                    about={product.about}
                                 />
                             </div>
                         </Card>
