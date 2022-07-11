@@ -68,23 +68,18 @@ To run this project, you will need to add the following environment variables to
 ### NEXT_PUBLIC_BACKEND
 
 `NEXT_PUBLIC_BACKEND_API_SSL`
-
 `NEXT_PUBLIC_BACKEND_API_HOST`
-
 `NEXT_PUBLIC_BACKEND_API_PORT`
-
 `NEXT_PUBLIC_BACKEND_API_VERSION`
 
 ### FRONTEND_API
 
 `FRONTEND_API_HOST=localhost`
-
 `FRONTEND_API_PORT`
 
 ### Session
 
 `SESSION_SECRET`
-
 `SESSION_NAME`
 
 ## Features
