@@ -85,39 +85,50 @@ const reducer = (state = initialState, action) => {
 //     }
 // };
 
-export const fetchProfile = (profile) => {
-    return async (dispatch) => {
-        try {
-            const { data: fetchedProfile } = await axiosServer.get("/auth/me");
-            dispatch({
-                type: "UPDATE_AUTH",
-                payload: fetchedProfile.user,
-            });
-            dispatch({
-                type: "UPDATE_PROFILE",
-                payload: fetchedProfile.user,
-            });
-            Notify.success(fetchedProfile?.message || "Login Successful", {
-                position: "right-top",
-                width: "280px",
-                distance: "10px",
-                opacity: 1,
-                timeout: 1000,
-                pauseOnHover: true,
-                keepOnHover: true,
-            });
-            return fetchedProfile;
-        } catch (error) {
-            Notify.failure(
-                error.response?.data?.message || "You need to logged In",
-                {
+export const fetchProfile = () => {
+    return async (dispatch, getState) => {
+        if (
+            getState.auth &&
+            getState.auth.user &&
+            getState.auth.isAuthenticated &&
+            !getState.auth.profile
+        ) {
+            try {
+                const { data: fetchedProfile } = await axiosServer.get(
+                    "/auth/me"
+                );
+                dispatch({
+                    type: "UPDATE_AUTH",
+                    payload: fetchedProfile.user,
+                });
+                dispatch({
+                    type: "UPDATE_PROFILE",
+                    payload: fetchedProfile.user,
+                });
+                Notify.success(fetchedProfile?.message || "Login Successful", {
                     position: "right-top",
+                    width: "280px",
+                    distance: "10px",
+                    opacity: 1,
                     timeout: 1000,
                     pauseOnHover: true,
                     keepOnHover: true,
-                }
-            );
-            return error.response?.data;
+                });
+                return fetchedProfile;
+            } catch (error) {
+                Notify.failure(
+                    error.response?.data?.message || "You need to logged In",
+                    {
+                        position: "right-top",
+                        timeout: 1000,
+                        pauseOnHover: true,
+                        keepOnHover: true,
+                    }
+                );
+                dispatch(signOut());
+
+                return error.response?.data;
+            }
         }
     };
 };

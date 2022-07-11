@@ -29,3 +29,4 @@ export * as categoriesProductActions from "./categoriesProduct";
 export * as categoriesMarketActions from "./categoriesMarket";
 
 export * as commentsActions from "./comments";
+export * as reviewsActions from "./reviews";

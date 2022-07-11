@@ -1,3 +1,8 @@
+import { bindActionCreators } from "redux";
+import { axiosServer } from "../../db/axios";
+import { getError } from "../../utils/error";
+import { categoriesProductActions } from "../actions";
+
 const CATEGORIES_PRODUCT_FETCH_REQUEST = "CATEGORIES_PRODUCT_FETCH_REQUEST";
 const CATEGORIES_PRODUCT_FETCH_SUCCESS = "CATEGORIES_PRODUCT_FETCH_SUCCESS";
 const CATEGORIES_PRODUCT_FETCH_FAIL = "CATEGORIES_PRODUCT_FETCH_FAIL";
@@ -45,6 +50,24 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
     }
+};
+
+export const fetchCategoriesProduct = () => {
+    return async (dispatch, getState) => {
+        const {
+            categoriesProductFetchFail,
+            categoriesProductFetchRequest,
+            categoriesProductFetchSuccess,
+        } = bindActionCreators(categoriesProductActions, dispatch);
+
+        categoriesProductFetchRequest();
+        try {
+            const { data } = await axiosServer.get("/categories/type/product");
+            categoriesProductFetchSuccess(data.categories);
+        } catch (error) {
+            categoriesProductFetchFail(getError(error));
+        }
+    };
 };
 
 export default reducer;

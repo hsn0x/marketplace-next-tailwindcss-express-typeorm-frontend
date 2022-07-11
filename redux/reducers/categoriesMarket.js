@@ -1,3 +1,8 @@
+import { bindActionCreators } from "redux";
+import { axiosServer } from "../../db/axios";
+import { getError } from "../../utils/error";
+import { categoriesMarketActions } from "../actions";
+
 const CATEGORIES_MARKET_FETCH_REQUEST = "CATEGORIES_MARKET_FETCH_REQUEST";
 const CATEGORIES_MARKET_FETCH_SUCCESS = "CATEGORIES_MARKET_FETCH_SUCCESS";
 const CATEGORIES_MARKET_FETCH_FAIL = "CATEGORIES_MARKET_FETCH_FAIL";
@@ -45,6 +50,25 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
     }
+};
+
+export const fetchCategoriesMarket = () => {
+    return async (dispatch, getState) => {
+        console.log("fetchCategoriesMarket");
+        const {
+            categoriesMarketFetchFail,
+            categoriesMarketFetchRequest,
+            categoriesMarketFetchSuccess,
+        } = bindActionCreators(categoriesMarketActions, dispatch);
+
+        categoriesMarketFetchRequest();
+        try {
+            const { data } = await axiosServer.get("/categories/type/market");
+            categoriesMarketFetchSuccess(data.categories);
+        } catch (error) {
+            categoriesMarketFetchFail(getError(error));
+        }
+    };
 };
 
 export default reducer;

@@ -1,10 +1,16 @@
 import React from "react";
 import ProductPageTabsReviewsBox from "./ProductPageTabsReviewsBox";
+import ProductPageTabsReviewsInsert from "./ProductPageTabsReviewsInsert";
 
 const ProductPageTabsReviews = ({ reviews }) => {
     return (
         <div>
-            <ProductPageTabsReviewsBox reviews={reviews} />
+            <div>
+                <ProductPageTabsReviewsInsert />
+            </div>
+            <div>
+                <ProductPageTabsReviewsBox reviews={reviews} />
+            </div>
         </div>
     );
 };

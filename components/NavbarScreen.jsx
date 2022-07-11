@@ -28,6 +28,8 @@ import { getError } from "../utils/error";
 import { axiosServer } from "../db/axios";
 import { handleCategoriesTree } from "../lib/handleCategoriesTree";
 import Image from "next/image";
+import { fetchCategoriesMarket } from "../redux/reducers/categoriesMarket";
+import { fetchCategoriesProduct } from "../redux/reducers/categoriesProduct";
 
 const NavbarScreen = () => {
     const dispatch = useDispatch();
@@ -42,17 +44,6 @@ const NavbarScreen = () => {
     const isHandleCategoriesProductTree =
         handleCategoriesTree(categoriesProduct);
     const isHandleCategoriesMarketTree = handleCategoriesTree(categoriesMarket);
-
-    const {
-        categoriesProductFetchFail,
-        categoriesProductFetchRequest,
-        categoriesProductFetchSuccess,
-    } = bindActionCreators(categoriesProductActions, dispatch);
-    const {
-        categoriesMarketFetchFail,
-        categoriesMarketFetchRequest,
-        categoriesMarketFetchSuccess,
-    } = bindActionCreators(categoriesMarketActions, dispatch);
 
     const isHandelNavbarNavigations = handelNavbarNavigations(
         navbarNavigations,
@@ -70,40 +61,20 @@ const NavbarScreen = () => {
     };
 
     useEffect(() => {
-        const myProfile = async () => {
-            if (auth.user && auth.isAuthenticated && !auth.profile) {
-                const fetchedProfile = await dispatch(fetchProfile());
-                if (!fetchedProfile?.isAuthenticated) {
-                    dispatch(signOut());
-                }
-            }
-        };
-        myProfile();
+        // const myProfile = async () => {
+        //     if (auth.user && auth.isAuthenticated && !auth.profile) {
+        //         const fetchedProfile = await dispatch(fetchProfile());
+        //         if (!fetchedProfile?.isAuthenticated) {
+        //             dispatch(signOut());
+        //         }
+        //     }
+        // };
+        // myProfile();
 
-        const fetchCategoriesProduct = async () => {
-            categoriesProductFetchRequest();
-            try {
-                const { data } = await axiosServer.get(
-                    "/categories/type/product"
-                );
-                categoriesProductFetchSuccess(data.categories);
-            } catch (error) {
-                categoriesProductFetchFail(getError(error));
-            }
-        };
-        const fetchCategoriesMarket = async () => {
-            categoriesMarketFetchRequest();
-            try {
-                const { data } = await axiosServer.get(
-                    "/categories/type/market"
-                );
-                categoriesMarketFetchSuccess(data.categories);
-            } catch (error) {
-                categoriesMarketFetchFail(getError(error));
-            }
-        };
-        fetchCategoriesMarket();
-        fetchCategoriesProduct();
+        dispatch(fetchProfile());
+
+        dispatch(fetchCategoriesMarket());
+        dispatch(fetchCategoriesProduct());
     }, [auth.user, dispatch, auth.isAuthenticated, auth.profile]);
 
     return (
