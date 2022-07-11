@@ -1,6 +1,6 @@
 {
     "name": "hsn-marketplace-nextjs-frontend",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "private": true,
     "scripts": {
         "dev": "next dev",
@@ -8,6 +8,8 @@
         "start": "next start",
         "lint": "next lint"
     },
+    "author": "Hassane Bendaoud <40140987+realHassaneBen@users.noreply.github.com>",
+    "license": "MIT",
     "dependencies": {
         "@elastic/elasticsearch": "^8.2.1",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
