@@ -51,7 +51,7 @@ const Products = ({ authUser }) => {
                 const { data } = await axiosServer.get("/products", {
                     params: {
                         page: currentPage,
-                        size: 5,
+                        size: 21,
                     },
                 });
                 productsFetchSuccess(data);
