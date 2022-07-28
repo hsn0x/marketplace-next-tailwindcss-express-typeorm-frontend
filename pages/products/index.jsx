@@ -65,9 +65,10 @@ const Products = ({ authUser }) => {
             categoriesProductFetchRequest();
             try {
                 const { data } = await axiosServer.get(
-                    "/categories/type/product"
+                    "/categories/type/product",
+                    { params }
                 );
-                categoriesProductFetchSuccess(data.categories);
+                categoriesProductFetchSuccess(data.rows);
             } catch (error) {
                 categoriesProductFetchFail(getError(error));
             }

@@ -33,10 +33,17 @@ const CategoriesPage = ({ authUser }) => {
         const fetchCategories = async () => {
             categoriesFetchRequest();
             try {
+                const params = {
+                    page: 0,
+                    size: 99999999999,
+                };
                 const { data } = await axiosServer.get(
-                    "/categories/type/market"
+                    "/categories/type/market",
+                    {
+                        params,
+                    }
                 );
-                categoriesFetchSuccess(data.categories);
+                categoriesFetchSuccess(data.rows);
             } catch (error) {
                 categoriesFetchFail(getError(error));
             }
