@@ -1,7 +1,8 @@
-import { Card } from "flowbite-react";
+import { Card, Tabs } from "flowbite-react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
+import ProductsBox from "../components/Products/ProductsBox";
 import StoresBox from "../components/Stores/StoresBox";
 import { axiosServer } from "../db/axios";
 import { notRequireAuthentication } from "../HOC/notRequireAuthentication";
@@ -17,21 +18,9 @@ const HomePage = ({ authUser }) => {
      * use Selector Markets
      * use Selector Products
      */
-    const {
-        rows: markets,
-        loading: marketsLoading,
-        totalItems: marketsTotalItems,
-        totalPages: marketsTotalPages,
-        currentPage: marketsCurrentPage,
-    } = useSelector(({ markets }) => markets);
+    const markets = useSelector(({ markets }) => markets);
+    const products = useSelector(({ products }) => products);
     console.log("markets", markets);
-    const {
-        rows: products,
-        loading: productsLoading,
-        totalItems: productsTotalItems,
-        totalPages: productsTotalPages,
-        currentPage: productsCurrentPage,
-    } = useSelector(({ products }) => products);
 
     /**
      * Markets Actions
@@ -57,7 +46,7 @@ const HomePage = ({ authUser }) => {
             marketsFetchRequest();
             try {
                 const { data } = await axiosServer.get("/markets");
-                marketsFetchSuccess(data.rows);
+                marketsFetchSuccess(data);
             } catch (error) {
                 marketsFetchFail(getError(error));
             }
@@ -70,12 +59,7 @@ const HomePage = ({ authUser }) => {
         const fetchProducts = async () => {
             productsFetchRequest();
             try {
-                const { data } = await axiosServer.get("/products", {
-                    params: {
-                        page: currentPage,
-                        size: 21,
-                    },
-                });
+                const { data } = await axiosServer.get("/products");
                 productsFetchSuccess(data);
             } catch (error) {
                 productsFetchFail(getError(error));
@@ -86,7 +70,87 @@ const HomePage = ({ authUser }) => {
 
     return (
         <div>
-            <StoresBox markets={markets} />
+            <div>
+                <div className="mb-2">
+                    <Card className="">
+                        <h2 className="text-4xl">Welcome To Marketplace</h2>
+                    </Card>
+                </div>
+            </div>
+            <Tabs.Group>
+                <Tabs.Item title="Products">
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">
+                                        Favorites Products
+                                    </h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <ProductsBox products={products.rows} />
+                    </div>
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">
+                                        Most Viwed Products
+                                    </h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <ProductsBox products={products.rows} />
+                    </div>
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">Top Products</h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <ProductsBox products={products.rows} />
+                    </div>
+                </Tabs.Item>
+                <Tabs.Item title="Stores">
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">
+                                        Favorites Stores
+                                    </h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <StoresBox markets={markets.rows} />
+                    </div>
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">
+                                        Most Viwed Stores
+                                    </h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <StoresBox markets={markets.rows} />
+                    </div>
+                    <div>
+                        <div>
+                            <div className="mb-2">
+                                <Card className="">
+                                    <h2 className="text-4xl">Top Stores</h2>
+                                </Card>
+                            </div>
+                        </div>
+                        <StoresBox markets={markets.rows} />
+                    </div>
+                </Tabs.Item>
+            </Tabs.Group>
         </div>
     );
 };
