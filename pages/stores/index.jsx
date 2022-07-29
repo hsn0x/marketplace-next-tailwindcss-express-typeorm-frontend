@@ -13,7 +13,7 @@ import StorePageLoading from "../../components/Stores/StoresPageLoading";
 import StoresBox from "../../components/Stores/StoresBox";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
-import ProductsPagination from "../../components/Products/ProductsPagination";
+import StoresPagination from "../../components/Stores/StoresPagination";
 
 const MarketsPage = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -42,16 +42,18 @@ const MarketsPage = ({ authUser }) => {
 
     return (
         <div>
-            <StorePageLoading loading={markets.loading} />
             <div>
-                <ProductsPagination
+                <StorePageLoading loading={markets.loading} />
+            </div>
+            <div>
+                <StorePageTitle title="All Stores" />
+            </div>
+            <div>
+                <StoresPagination
                     totalItems={markets.totalItems}
                     totalPages={markets.totalPages}
                     currentPage={markets.currentPage}
                 />
-            </div>
-            <div>
-                <StorePageTitle title="All Stores" />
             </div>
             <div>
                 {marketsSearch.rows && marketsSearch.rows.length > 0 ? (
@@ -60,9 +62,8 @@ const MarketsPage = ({ authUser }) => {
                     <StoresBox markets={markets.rows} />
                 )}
             </div>
-
             <div>
-                <ProductsPagination
+                <StoresPagination
                     totalItems={markets.totalItems}
                     totalPages={markets.totalPages}
                     currentPage={markets.currentPage}
