@@ -20,7 +20,6 @@ const HomePage = ({ authUser }) => {
      */
     const markets = useSelector(({ markets }) => markets);
     const products = useSelector(({ products }) => products);
-    console.log("markets", markets);
 
     /**
      * Markets Actions

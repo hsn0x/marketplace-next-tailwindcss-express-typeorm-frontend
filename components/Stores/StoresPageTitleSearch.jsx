@@ -30,7 +30,6 @@ const StoresPageTitleSearch = () => {
                 .join(" ");
             if (!validQuery) return;
 
-            console.log({ validQuery });
             const { data } = await axiosServer.get(`/markets/q/${validQuery}`);
             marketsSearchFetchSuccess(data.rows);
         } catch (error) {

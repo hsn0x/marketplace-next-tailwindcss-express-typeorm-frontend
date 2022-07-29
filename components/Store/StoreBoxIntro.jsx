@@ -16,7 +16,7 @@ const StoreBoxIntro = ({ avatars, name, username, slug }) => {
                         >
                             <Link href={`/stores/name/${slug}`}>
                                 <div className="cursor-pointer">
-                                    <span className="text-xl">{name}</span>{" "}
+                                    <span className="text-xl">{name}</span>
                                 </div>
                             </Link>
                             <Link href={`/stores/name/${slug}`}>

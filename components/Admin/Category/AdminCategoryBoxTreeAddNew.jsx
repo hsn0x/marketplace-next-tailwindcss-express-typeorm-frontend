@@ -47,11 +47,6 @@ const AdminCategoryBoxTreeAddNew = ({ category, categoryType }) => {
 
     const handleSaveNewCategory = async () => {
         try {
-            console.log({
-                name: newCategoryInput,
-                parentId: category.id,
-                type: categoryType,
-            });
             await axiosServer.post("/categories", {
                 name: newCategoryInput,
                 parentId: category.id,

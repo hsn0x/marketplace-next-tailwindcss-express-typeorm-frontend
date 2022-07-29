@@ -16,12 +16,6 @@ const StoreEditPageContentCategory = () => {
     const [categorySubSelected, setCategoryRootSubSelected] = useState(0);
     const [categorySubSubSelected, setCategoryRootSubSubSelected] = useState(0);
 
-    console.log({
-        categorySelected,
-        categorySubSelected,
-        categorySubSubSelected,
-    });
-
     const {
         categoriesFetchFail,
         categoriesFetchRequest,
@@ -218,7 +212,6 @@ const StoreEditPageContentCategory = () => {
                 );
                 categoriesFetchSuccess(data.rows);
 
-                console.log(edit.CategoriesIds[0]);
                 setCategorySelected(edit.CategoriesIds[0] || 0);
                 setCategoryRootSubSelected(edit.CategoriesIds[1] || 0);
                 setCategoryRootSubSubSelected(edit.CategoriesIds[2] || 0);

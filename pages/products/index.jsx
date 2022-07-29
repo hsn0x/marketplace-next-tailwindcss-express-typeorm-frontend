@@ -89,7 +89,6 @@ const Products = ({ authUser }) => {
                 />
             </div>
             <div>
-                {console.log(products)}
                 {productsSearch && productsSearch.length > 0 ? (
                     <ProductsBox products={productsSearch.rows} />
                 ) : productsFilters && productsFilters.length > 0 ? (

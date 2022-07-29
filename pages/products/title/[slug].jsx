@@ -31,7 +31,6 @@ const ProductPage = ({ authUser, params }) => {
     useEffect(() => {
         dispatch(updateAuth(authUser));
         dispatch(updateIsAuthenticated(!!authUser));
-        console.log({ authUser });
 
         const fetchProduct = async () => {
             productFetchRequest();
