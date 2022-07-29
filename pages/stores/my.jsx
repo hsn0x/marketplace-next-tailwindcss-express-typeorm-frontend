@@ -8,17 +8,19 @@ import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import { fetchProfile } from "../../redux/reducers/auth";
 
 const StoresMyPage = ({ authUser }) => {
-    const { profile } = useSelector(({ auth }) => auth);
+    const auth = useSelector(({ auth }) => auth);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(updateAuth(authUser));
         dispatch(updateIsAuthenticated(!!authUser));
-        // dispatch(fetchProfile());
+        dispatch(fetchProfile());
     }, []);
     return (
         <div>
             <StoresMyPageTitle title="My Stores" />
-            {profile && <StoresMyPageContent Markets={profile.Markets} />}
+            {auth.profile && (
+                <StoresMyPageContent markets={auth.profile.Markets} />
+            )}
         </div>
     );
 };
