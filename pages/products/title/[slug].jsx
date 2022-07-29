@@ -39,7 +39,7 @@ const ProductPage = ({ authUser, params }) => {
                 const { data } = await axiosServer.get(
                     `/products/title/${slug}`
                 );
-                productFetchSuccess(data.product);
+                productFetchSuccess(data);
             } catch (error) {
                 productFetchFail(getError(error));
                 console.log(error);

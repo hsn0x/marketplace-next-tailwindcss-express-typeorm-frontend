@@ -18,7 +18,7 @@ const StoresMyPage = ({ authUser }) => {
     return (
         <div>
             <StoresMyPageTitle title="My Stores" />
-            {profile && <StoresMyPageContent markets={profile.Markets} />}
+            {profile && <StoresMyPageContent Markets={profile.Markets} />}
         </div>
     );
 };

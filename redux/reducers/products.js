@@ -12,10 +12,12 @@ const PRODUCTS_DELETE_RESET = "PRODUCTS_DELETE_RESET";
 const initialState = {
     loading: false,
     error: "",
+
     rows: [],
     totalItems: 0,
     totalPages: 0,
     currentPage: 1,
+    count: null,
 };
 
 const reducer = (state = initialState, action) => {

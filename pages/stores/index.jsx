@@ -14,25 +14,24 @@ import StoresBox from "../../components/Stores/StoresBox";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 
-const Markets = ({ authUser }) => {
+const MarketsPage = ({ authUser }) => {
     const dispatch = useDispatch();
-    const { markets, loading } = useSelector(({ markets }) => markets);
-    const {
-        markets: searchMarkets,
-        query,
-        loading: searchLoading,
-    } = useSelector(({ marketsSearch }) => marketsSearch);
+
+    const markets = useSelector(({ markets }) => markets);
+    const marketsSearch = useSelector(({ marketsSearch }) => marketsSearch);
+
     const { marketsFetchFail, marketsFetchRequest, marketsFetchSuccess } =
         bindActionCreators(marketsActions, dispatch);
 
     useEffect(() => {
         dispatch(updateAuth(authUser));
         dispatch(updateIsAuthenticated(!!authUser));
+
         const fetchMarkets = async () => {
             marketsFetchRequest();
             try {
                 const { data } = await axiosServer.get("/markets");
-                marketsFetchSuccess(data.markets);
+                marketsFetchSuccess(data);
             } catch (error) {
                 marketsFetchFail(getError(error));
             }
@@ -42,12 +41,12 @@ const Markets = ({ authUser }) => {
 
     return (
         <div>
-            <StorePageLoading loading={loading} />
+            <StorePageLoading loading={markets.loading} />
             <StorePageTitle title="All Stores" />
-            {searchMarkets && searchMarkets.length > 0 ? (
-                <StoresBox markets={searchMarkets} />
+            {marketsSearch.rows && marketsSearch.rows.length > 0 ? (
+                <StoresBox markets={marketsSearch.rows} />
             ) : (
-                <StoresBox markets={markets} />
+                <StoresBox markets={markets.rows} />
             )}
         </div>
     );
@@ -57,4 +56,4 @@ export const getServerSideProps = notRequireAuthentication((context) => {
     return {};
 });
 
-export default Markets;
+export default MarketsPage;

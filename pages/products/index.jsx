@@ -9,7 +9,7 @@ import { Card, Carousel, Pagination, Spinner } from "flowbite-react";
 import Link from "next/link";
 import ProductBox from "../../components/Product/ProductBox";
 import ProductsPageTitle from "../../components/Products/ProductsPageTitle";
-import ProductPageLoading from "../../components/Products/ProductsPageLoading";
+import ProductsPageLoading from "../../components/Products/ProductsPageLoading";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
 import ProductsBox from "../../components/Products/ProductsBox";
@@ -18,19 +18,10 @@ import ProductsPagination from "../../components/Products/ProductsPagination";
 
 const Products = ({ authUser }) => {
     const dispatch = useDispatch();
-    const {
-        rows: products,
-        loading,
-        totalItems,
-        totalPages,
-        currentPage,
-    } = useSelector(({ products }) => products);
-    const {
-        products: searchProducts,
-        query,
-        loading: searchLoading,
-    } = useSelector(({ productsSearch }) => productsSearch);
-    const { products: filtersProducts, loading: filtersLoading } = useSelector(
+
+    const products = useSelector(({ products }) => products);
+    const productsSearch = useSelector(({ productsSearch }) => productsSearch);
+    const productsFilters = useSelector(
         ({ productsFilters }) => productsFilters
     );
 
@@ -79,7 +70,7 @@ const Products = ({ authUser }) => {
     return (
         <div className="flex flex-col gap-1">
             <div>
-                <ProductPageLoading loading={loading} />
+                <ProductsPageLoading loading={products.loading} />
             </div>
             <div>
                 <ProductsPageTitle title="All Products" />
@@ -89,25 +80,25 @@ const Products = ({ authUser }) => {
             </div>
             <div>
                 <ProductsPagination
-                    totalItems={totalItems}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
+                    totalItems={products.totalItems}
+                    totalPages={products.totalPages}
+                    currentPage={products.currentPage}
                 />
             </div>
             <div>
-                {searchProducts && searchProducts.length > 0 ? (
-                    <ProductsBox products={searchProducts} />
-                ) : filtersProducts && filtersProducts.length > 0 ? (
-                    <ProductsBox products={filtersProducts} />
+                {productsSearch && productsSearch.length > 0 ? (
+                    <ProductsBox products={productsSearch.rows} />
+                ) : productsFilters && productsFilters.length > 0 ? (
+                    <ProductsBox products={productsFilters.rows} />
                 ) : (
-                    <ProductsBox products={products} />
+                    <ProductsBox products={products.rows} />
                 )}
             </div>
             <div>
                 <ProductsPagination
-                    totalItems={totalItems}
-                    totalPages={totalPages}
-                    currentPage={currentPage}
+                    totalItems={products.totalItems}
+                    totalPages={products.totalPages}
+                    currentPage={products.currentPage}
                 />
             </div>
         </div>

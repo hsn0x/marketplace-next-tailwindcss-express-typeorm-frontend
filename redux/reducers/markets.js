@@ -10,9 +10,14 @@ const MARKETS_DELETE_FAIL = "MARKETS_DELETE_FAIL";
 const MARKETS_DELETE_RESET = "MARKETS_DELETE_RESET";
 
 const initialState = {
-    markets: [],
     loading: false,
     error: "",
+
+    rows: [],
+    totalItems: 0,
+    totalPages: 0,
+    currentPage: 1,
+    count: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +28,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                markets: action.payload,
+                ...action.payload,
                 error: "",
             };
         case MARKETS_FETCH_FAIL:

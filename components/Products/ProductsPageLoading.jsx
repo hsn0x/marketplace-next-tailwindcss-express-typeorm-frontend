@@ -1,7 +1,7 @@
 import { Spinner } from "flowbite-react";
 import React from "react";
 
-const ProductPageLoading = ({ loading }) => {
+const ProductsPageLoading = ({ loading }) => {
     return (
         <div>
             {loading && (
@@ -16,4 +16,4 @@ const ProductPageLoading = ({ loading }) => {
     );
 };
 
-export default ProductPageLoading;
+export default ProductsPageLoading;

@@ -11,9 +11,14 @@ const PRODUCTS_SEARCH_DELETE_FAIL = "PRODUCTS_SEARCH_DELETE_FAIL";
 const PRODUCTS_SEARCH_DELETE_RESET = "PRODUCTS_SEARCH_DELETE_RESET";
 
 const initialState = {
-    products: [],
     loading: false,
     error: "",
+
+    rows: [],
+    totalItems: 0,
+    totalPages: 0,
+    currentPage: 1,
+    count: null,
 };
 
 const reducer = (state = initialState, action) => {

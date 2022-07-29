@@ -8,7 +8,7 @@ import { getError } from "../../utils/error";
 
 const StoresPageTitleSearch = () => {
     const dispatch = useDispatch();
-    const { markets, query, loading } = useSelector(
+    const { Markets, query, loading } = useSelector(
         ({ marketsSearch }) => marketsSearch
     );
 
@@ -32,7 +32,7 @@ const StoresPageTitleSearch = () => {
 
             console.log({ validQuery });
             const { data } = await axiosServer.get(`/markets/q/${validQuery}`);
-            marketsSearchFetchSuccess(data.markets);
+            marketsSearchFetchSuccess(data.rows);
         } catch (error) {
             marketsSearchFetchFail(getError(error));
         }

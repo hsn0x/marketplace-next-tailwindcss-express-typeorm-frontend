@@ -34,7 +34,7 @@ const MarketPage = ({ params }) => {
             marketFetchRequest();
             try {
                 const { data } = await axiosServer.get(`/markets/name/${slug}`);
-                marketFetchSuccess(data.market);
+                marketFetchSuccess(data);
             } catch (error) {
                 marketFetchFail(getError(error));
                 console.log(error);
