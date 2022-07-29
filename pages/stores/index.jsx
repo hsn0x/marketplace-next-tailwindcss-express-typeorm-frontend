@@ -13,6 +13,7 @@ import StorePageLoading from "../../components/Stores/StoresPageLoading";
 import StoresBox from "../../components/Stores/StoresBox";
 import { notRequireAuthentication } from "../../HOC/notRequireAuthentication";
 import { updateAuth, updateIsAuthenticated } from "../../redux/actions/auth";
+import ProductsPagination from "../../components/Products/ProductsPagination";
 
 const MarketsPage = ({ authUser }) => {
     const dispatch = useDispatch();
@@ -42,12 +43,31 @@ const MarketsPage = ({ authUser }) => {
     return (
         <div>
             <StorePageLoading loading={markets.loading} />
-            <StorePageTitle title="All Stores" />
-            {marketsSearch.rows && marketsSearch.rows.length > 0 ? (
-                <StoresBox markets={marketsSearch.rows} />
-            ) : (
-                <StoresBox markets={markets.rows} />
-            )}
+            <div>
+                <ProductsPagination
+                    totalItems={markets.totalItems}
+                    totalPages={markets.totalPages}
+                    currentPage={markets.currentPage}
+                />
+            </div>
+            <div>
+                <StorePageTitle title="All Stores" />
+            </div>
+            <div>
+                {marketsSearch.rows && marketsSearch.rows.length > 0 ? (
+                    <StoresBox markets={marketsSearch.rows} />
+                ) : (
+                    <StoresBox markets={markets.rows} />
+                )}
+            </div>
+
+            <div>
+                <ProductsPagination
+                    totalItems={markets.totalItems}
+                    totalPages={markets.totalPages}
+                    currentPage={markets.currentPage}
+                />
+            </div>
         </div>
     );
 };
