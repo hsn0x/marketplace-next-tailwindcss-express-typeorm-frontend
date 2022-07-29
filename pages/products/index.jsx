@@ -36,15 +36,18 @@ const Products = ({ authUser }) => {
     useEffect(() => {
         dispatch(updateAuth(authUser));
         dispatch(updateIsAuthenticated(!!authUser));
+
         const fetchProducts = async () => {
             productsFetchRequest();
             try {
+                const params = {
+                    page: products.currentPage,
+                    size: 21,
+                };
                 const { data } = await axiosServer.get("/products", {
-                    params: {
-                        page: currentPage,
-                        size: 21,
-                    },
+                    params,
                 });
+                console.log(data);
                 productsFetchSuccess(data);
             } catch (error) {
                 productsFetchFail(getError(error));
@@ -86,6 +89,7 @@ const Products = ({ authUser }) => {
                 />
             </div>
             <div>
+                {console.log(products)}
                 {productsSearch && productsSearch.length > 0 ? (
                     <ProductsBox products={productsSearch.rows} />
                 ) : productsFilters && productsFilters.length > 0 ? (
